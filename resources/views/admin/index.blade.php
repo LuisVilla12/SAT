@@ -1,20 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="{{ asset('build/assets/app-8t1cj77N.css') }}">
-    <script src="https://kit.fontawesome.com/aaef00cbdd.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@extends('layout.app')
+@section('title')
+    Administración
+@endsection
 
-
-</head>
-<body>
+@section('contenido')
     <div class=" container mx-auto ">
         <div class="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-            <h1 class="text-4xl font-extrabold text-center text-gray-800 mb-8 tracking-tight uppercase transition-all duration-300 hover:text-primary">
+            <h1 class="text-5xl font-bold text-center text-gray-800 mb-14 tracking-tight transition-all duration-300 hover:text-primary">
                 Administración
             </h1>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
@@ -51,45 +43,58 @@
                 
             </div>
         </div>
-        
-    </div>
-</body>
+@endsection
+@stack('scripts')
+<script src="https://kit.fontawesome.com/aaef00cbdd.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     function showProveedoresModal() {
         Swal.fire({
-            title: '¿Qué operación realizará?',
+            title: '¿Qué desea hacer?',
             text: 'Seleccione una opción',
             icon: 'question',
+            showDenyButton: true,
             showCancelButton: true,
             confirmButtonText: 'Registrar proveedor',
-            cancelButtonText:  'Consultar proveedor',
-            focusCancel: true,
+            denyButtonText: 'Consultar proveedor',
+            cancelButtonText: 'Cancelar',
             reverseButtons: true,
             customClass: {
-                confirmButton: 'bg-blue-500 text-white',
-                cancelButton: 'bg-green-500 text-white'
+                confirmButton: 'bg-blue-500 text-white hover:bg-blue-600',
+                denyButton: 'bg-green-500 text-white hover:bg-green-600',
+                cancelButton: 'bg-gray-500 text-white hover:bg-gray-600'
             }
         }).then((result) => {
             if (result.isConfirmed) {
-                // Aquí se ejecuta si el usuario elige "Registrar nuevo proveedor"
+                // Opción de "Registrar proveedor"
                 Swal.fire(
                     'Registrar proveedor',
                     'Será redirigido a la sección de registro.',
                     'success'
                 );
-                // Puedes redirigir al formulario de registro de proveedor
-                window.location.href = '/registro-proveedor'; // Cambia esta URL según corresponda
-            } else if (result.isDismissed) {
-                // Aquí se ejecuta si el usuario elige "Consultar proveedor"
+                // Redirigir al formulario de registro de proveedor
+                setTimeout(() => {
+                    window.location.href = '/registro-proveedor'; // Cambia esta URL según corresponda
+                }, 2000);
+            } else if (result.isDenied) {
+                // Opción de "Consultar proveedor"
                 Swal.fire(
                     'Consultar proveedor',
                     'Será redirigido a la sección de consulta.',
                     'info'
                 );
-                // Puedes redirigir a la sección de consulta de proveedor
-                window.location.href = '/consultar-proveedor'; // Cambia esta URL según corresponda
+                setTimeout(() => {
+                    window.location.href = '/consultar-proveedor'; // Cambia esta URL según corresponda
+                }, 2000);
+                // Redirigir a la sección de consulta de proveedor
+            } else if (result.isDismissed) {
+                // Opción de "Cancelar"
+                Swal.fire(
+                    'Acción cancelada',
+                    'No se realizó ninguna acción.',
+                    'error'
+                );
             }
         });
     }
 </script>
-</html>

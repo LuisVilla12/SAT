@@ -7,4 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Proveedors extends Model
 {
     //
+    protected $fillable = [
+        'name_persona',
+        'name_company',
+        'type',
+        'date_registro'
+    ];
+
 }
