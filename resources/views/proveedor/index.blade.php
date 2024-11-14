@@ -10,7 +10,6 @@
         <h2 class="text-4xl font-bold text-center text-gray-700 mb-10">Todos los proveedores</h2>
 
         <table class="min-w-full bg-white">
-            <!-- Cabecera de la tabla -->
             <thead>
                 <tr class="bg-blue-600 text-white text-left">
                     <th class="py-3 px-4 uppercase font-semibold text-sm">ID</th>
@@ -21,7 +20,6 @@
                 </tr>
             </thead>
             
-            <!-- Cuerpo de la tabla -->
             <tbody class="text-gray-700 text-center">
                 <!-- Ejemplo de una fila de datos -->
                 <tr class="border-b border-gray-200 hover:bg-gray-100 transition duration-150">
