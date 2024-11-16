@@ -11,13 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('proveedors', function (Blueprint $table) {
+        Schema::create('visitas', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('name_persona');
-            $table->string('name_company');
-            $table->string('type');
-            $table->integer('state');
         });
     }
 
@@ -26,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('proveedors');
+        Schema::dropIfExists('visitas');
     }
 };

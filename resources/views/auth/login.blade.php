@@ -6,11 +6,11 @@
 <div class="flex items-center justify-center min-h-screen bg-gray-100">
     <form method="POST" action="{{ route('login') }}" novalidate class="px-10 py-8 bg-white shadow-lg rounded-lg w-full max-w-lg">
         @csrf
-        <h1 class="text-center text-blue-600 font-bold uppercase text-3xl mb-8">Iniciar Sesión</h1>
+        <h1 class="text-center text-black-600 font-bold  text-4xl mb-8 mt-2">Login </h1>
         
         <!-- Correo electrónico -->
         <div class="mb-6">
-            <label for="email" class="font-semibold text-gray-600 uppercase block mb-2">Correo Electrónico:</label>
+            <label for="email" class="font-semibold  text-gray-600 uppercase block mb-2 mt-5">Correo Electrónico:</label>
             <input type="text" id="email" name="email" value="{{ old('email') }}" placeholder="Ingrese su correo electrónico" 
                 class="px-4 py-2 block w-full rounded-lg shadow-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 @error('email') border-red-500 @enderror">
             @error('email')
@@ -40,15 +40,15 @@
         </div>
 
         <!-- Enlace para registro -->
-        <p class="my-8 text-center text-gray-500">
+        {{-- <p class="my-8 text-center text-gray-500">
             ¿No tiene una cuenta? 
             <a href="{{ route('register.create') }}" class="text-blue-600 font-semibold hover:underline">Regístrese Ahora</a>
-        </p>
+        </p> --}}
         
         <!-- Botón de inicio de sesión -->
         <div class="grid place-items-center mt-8">
-            <button type="submit" class="uppercase font-bold bg-blue-600 text-white py-3 px-10 rounded-full shadow-md hover:bg-blue-700 transition duration-300 ease-in-out cursor-pointer">
-                Iniciar Sesión
+            <button type="submit" class="font-bold bg-blue-700 text-white py-4 px-10 shadow-md hover:bg-blue-700 transition duration-300 ease-in-out cursor-pointer rounded-md">
+                Iniciar sesión
             </button>
         </div>
     </form>

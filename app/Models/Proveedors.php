@@ -11,7 +11,8 @@ class Proveedors extends Model
         'name_persona',
         'name_company',
         'type',
-        'date_registro'
+        'state'
     ];
 
 }
+
