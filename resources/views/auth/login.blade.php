@@ -10,10 +10,10 @@
         
         <!-- Correo electrónico -->
         <div class="mb-6">
-            <label for="email" class="font-semibold  text-gray-600 uppercase block mb-2 mt-5">Correo Electrónico:</label>
-            <input type="text" id="email" name="email" value="{{ old('email') }}" placeholder="Ingrese su correo electrónico" 
+            <label for="username" class="font-semibold  text-gray-600 uppercase block mb-2 mt-5">Usuario:</label>
+            <input type="text" id="username" name="username" value="{{ old('username') }}" placeholder="Ingrese su correo electrónico" 
                 class="px-4 py-2 block w-full rounded-lg shadow-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 @error('email') border-red-500 @enderror">
-            @error('email')
+            @error('username')
                 <p class="bg-red-500 text-white text-center font-semibold rounded-lg p-2 mt-2">{{ $message }}</p>
             @enderror
         </div>

@@ -13,6 +13,9 @@ class Proveedors extends Model
         'type',
         'state'
     ];
-
+    public function visitas()
+    {
+        return $this->hasMany(Visitas::class);
+    }
 }
 

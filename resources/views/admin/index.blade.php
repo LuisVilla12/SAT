@@ -178,7 +178,7 @@
                     'info'
                 );
                 setTimeout(() => {
-                    window.location.href = '/historal-visitas'; // Cambia esta URL según corresponda
+                    window.location.href = '/visitas'; // Cambia esta URL según corresponda
                 }, 2000);
                 // Redirigir a la sección de consulta de proveedor
             } else if (result.isDismissed) {

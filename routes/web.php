@@ -6,6 +6,7 @@ use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\VisitasController;
 use App\Models\User;
+use App\Models\Visitas;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [LoginController::class,'index'])->name('login');
@@ -25,6 +26,11 @@ Route::post('/editar-proveedor/{proveedor}/edit',[ ProveedorController::class,'u
 //Visitas
 Route::get('/registro-visitas', [VisitasController::class,'create'])->name('visitas.create');
 Route::post('/registro-visitas', [VisitasController::class,'store']);
+Route::get('/visitas', [VisitasController::class,'index'])->name('visitas.index');
+Route::get('/registar-salida/{visita}/edit',[ VisitasController::class,'edit'])->name('visitas.edit');
+Route::post('/registar-salida/{visita}/edit',[ VisitasController::class,'update']);
+Route::get('/mostrar-salida/{visita}',[ VisitasController::class,'show'])->name('visitas.show');
+//Pase
+Route::get('/visita/{id}/generar-pase', [VisitasController::class, 'generarPase'])->name('visitas.generarPase');
 
 
-// historal-visitas
