@@ -55,9 +55,9 @@ class VisitasController extends Controller
             'comentarios'=>'Sin comentarios',
             'state'=>1//1 sin finalizar 0 finalizada
         ]);
-        return response()->json(['success' => true, 'message' => 'Visita registrado exitosamente.']);
+        // return response()->json(['success' => true, 'message' => 'Visita registrado exitosamente.']);
 
-        // return redirect()->route('visitas.index');
+        return redirect()->route('visitas.index');
     }
 
     public function edit(Visitas $visita){

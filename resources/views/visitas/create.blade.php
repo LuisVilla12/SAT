@@ -78,11 +78,23 @@
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     const btnRegistrar=document.querySelector('.enviar');
-        
-        btnRegistrar.addEventListener('click',(e)=>{
-            e.preventDefault();
-            guardarVisita();
-        })
+    btnRegistrar.addEventListener('click', (e) => {
+    e.preventDefault(); // Evitar el envío inmediato del formulario
+    Swal.fire({
+        title: "¿Seguro que quieres registrar la visita?",
+        showDenyButton: true,
+        confirmButtonText: "Registrar",
+        denyButtonText: `Cancelar`
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Envía el formulario de forma tradicional
+            document.querySelector('.visitas').submit();
+        } else if (result.isDenied) {
+            Swal.fire("No se registró la visita", "", "info");
+        }
+    });
+});
+
 
     const timeInput = document.getElementById("hora_entrada");
     const now = new Date();
@@ -109,44 +121,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const fechaActual = `${año}-${mes}-${dia}`;
     fechaRegistroInput.value = fechaActual;  // Establecer la fecha en el input
 });
-function guardarVisita() {
-        const form = document.querySelector('.visitas');
-        const formData = new FormData(form);
 
-        Swal.fire({
-            title: "¿Seguro que quieres registrar la visita?",
-            showDenyButton: true,
-            showCancelButton: false,
-            confirmButtonText: "Registrar",
-            denyButtonText: `Cancelar`
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    fetch("{{ route('visitas.create') }}", {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        Swal.fire("Visita registrado exitosamente", "", "success");
-                        form.reset(); // Limpia el formulario
-                        setTimeout(() => {
-                            window.location.href = '/visitas'; // Cambia esta URL según corresponda
-                        }, 2000);
-                    } else {
-                        Swal.fire("Error al registrar la visita", data.message || "", "error");
-                    }
-                })
-                .catch(error => {
-                    Swal.fire("Error en el servidor", error.message || "", "error");
-                });
-            } else if (result.isDenied) {
-                    Swal.fire("No sera registrado", "", "info");
-                }
-            });
-    }
+
 
 </script>

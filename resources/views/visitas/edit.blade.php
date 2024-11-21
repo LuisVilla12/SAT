@@ -6,7 +6,7 @@
 <div class="flex items-center justify-center min-h-screen bg-gray-100">
     <form action="{{ route('visitas.edit',$visita) }}" method="POST" autocomplete="off" class="bg-white shadow-lg rounded-lg w-full max-w-lg p-8">
         @csrf
-        <h2 class="text-4xl font-bold text-center text-gray-700 mb-10">Registrar salida</h2>
+        <h2 class="text-4xl font-bold text-center text-gray-700 mb-10">Actualizar salida</h2>
         <!-- Nombre de la persona -->
         <div class="mb-6">
             <label for="name_persona" class="block text-gray-600 font-semibold mb-2">Nombre de la persona:</label>
@@ -50,7 +50,7 @@
         <!-- Hora de entrada -->
         <div class="mb-6">
             <label for="hora_entrada" class="block text-gray-600 font-semibold mb-2">Hora de entrada:</label>
-            <input type="time" id="hora_entrada" min="08:00" max="15:00" value="{{$visita->hora_entrada}}" name="hora_entrada" class="px-4 py-2 block w-full rounded-lg shadow-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <input type="time" id="hora_entrada" value="{{$visita->hora_entrada}}" name="hora_entrada" class="px-4 py-2 block w-full rounded-lg shadow-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400">
         </div>
         <!-- Hora de salida -->
         <div class="mb-6">

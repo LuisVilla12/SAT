@@ -39,6 +39,9 @@
                 <option value="compras">Compras</option>
                 <option value="administracion">Administración</option>
             </select>
+            @error('type')
+            <p class="mx-1 mt-1 text-red-500">Debes seleccionar un área de la empresa valida</p>
+        @enderror
         </div>
         
         <!-- Botón de Enviar -->
@@ -57,51 +60,27 @@
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const btnRegistrar=document.querySelector('.enviar');
+        console.log(btnRegistrar);
         
-        btnRegistrar.addEventListener('click',(e)=>{
-            e.preventDefault();
-            guardarProveedor();
-        })
-    });
-    function guardarProveedor() {
-        const form = document.querySelector('.proveedor');
-        const formData = new FormData(form);
-
+        btnRegistrar.addEventListener('click', (e) => {
+        e.preventDefault(); // Evitar el envío inmediato del formulario
         Swal.fire({
             title: "¿Seguro que quieres registrar el proveedor?",
             showDenyButton: true,
-            showCancelButton: false,
             confirmButtonText: "Registrar",
             denyButtonText: `Cancelar`
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    fetch("{{ route('proveedor.create') }}", {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        Swal.fire("Proveedor registrado exitosamente", "", "success");
-                        form.reset(); // Limpia el formulario
-                        setTimeout(() => {
-                            window.location.href = '/consultar-proveedor'; // Cambia esta URL según corresponda
-                        }, 2000);
-                    } else {
-                        Swal.fire("Error al registrar el proveedor", data.message || "", "error");
-                    }
-                })
-                .catch(error => {
-                    Swal.fire("Error en el servidor", error.message || "", "error");
-                });
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Envía el formulario de forma tradicional
+                document.querySelector('.proveedor').submit();
             } else if (result.isDenied) {
-                    Swal.fire("No sera registrado", "", "info");
-                }
-            });
-    }
-</script>
-
+                Swal.fire("No se registró la visita", "", "info");
+            }
+        });
+    });
+    });
+    
+    
+    
+    </script>
 

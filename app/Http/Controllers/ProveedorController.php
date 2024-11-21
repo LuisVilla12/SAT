@@ -28,8 +28,8 @@ class ProveedorController extends Controller
             'type'=>$request->type,
             'state'=>1
         ]);
-        return response()->json(['success' => true, 'message' => 'Proveedor registrado exitosamente.']);
-        // return redirect()->route('proveedor.index');
+        // return response()->json(['success' => true, 'message' => 'Proveedor registrado exitosamente.']);
+        return redirect()->route('proveedor.index');
     }
     
     public function edit(Proveedors $proveedor){
