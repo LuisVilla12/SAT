@@ -31,6 +31,8 @@ Route::get('/registar-salida/{visita}/edit',[ VisitasController::class,'edit'])-
 Route::post('/registar-salida/{visita}/edit',[ VisitasController::class,'update']);
 Route::get('/mostrar-salida/{visita}',[ VisitasController::class,'show'])->name('visitas.show');
 //Pase
+use App\Http\Controllers\VisitaController;
+
 Route::get('/visita/{id}/generar-pase', [VisitasController::class, 'generarPase'])->name('visitas.generarPase');
 
 

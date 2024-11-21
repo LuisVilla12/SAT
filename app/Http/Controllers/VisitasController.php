@@ -6,7 +6,8 @@ use App\Models\Proveedors;
 use App\Models\Visitas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Barryvdh\DomPDF\Facade as PDF;
+//use Barryvdh\DomPDF\Facade as PDF;
+use Mpdf\Mpdf;
 
 
 
@@ -93,16 +94,31 @@ class VisitasController extends Controller
         return view('visitas.show',['visita'=>$visita,'proveedores'=>$proveedores]);
     }
 
-    public function generarPase($id)
-    {
-        // Obtener el registro de la visita por su ID
-        $visita = Visitas::findOrFail($id);
 
-        // Generar el PDF utilizando la vista creada
-        $pdf = PDF::loadView('visitas.pase');
 
-        // Devolver el PDF generado como respuesta para descargar
-        return $pdf->download('pase_visita_'.$visita->id.'.pdf');
-    }
+public function generarPase($id)
+{
+    // Obtén el registro correspondiente
+    $registro = Visitas::findOrFail($id);
+    $proveedor_id=$registro['proveedors_id'];
+    $proveedor=Proveedors::findOrFail($proveedor_id);
+    // $nombreProveedor=$proveedor->name_company;
+    // Crea el contenido HTML del PDF
+    $html = view('visitas.pase', ['registro'=>$registro, 'proveedor'=>$proveedor])->render();
+
+    // Instancia de Mpdf
+    $mpdf = new Mpdf();
+
+    // Escribe el contenido en el PDF
+    $mpdf->WriteHTML($html);
+
+    // Descargar el PDF con un nombre personalizado
+    $filename = 'PaseDeVisita_' .$registro->fecha_visita.'_'. $registro->id . '.pdf';
+    return response()->make($mpdf->Output($filename, 'D'), 200, [
+        'Content-Type' => 'application/pdf',
+        'Content-Disposition' => 'inline; filename="' . $filename . '"'
+    ]);
+}
+
 }
 
