@@ -5,7 +5,7 @@
 
 @section('contenido')
 <div class="flex items-center justify-center min-h-screen bg-gray-100">
-    <form action="{{ route('proveedor.edit',$proveedor) }}" method="POST" class="w-full max-w-lg bg-white p-8 shadow-md rounded-lg">
+    <form action="{{ route('proveedor.edit',$proveedor) }}" method="POST" class="proveedor w-full max-w-lg bg-white p-8 shadow-md rounded-lg">
         @csrf
         <h2 class="text-4xl font-bold text-center text-gray-700 mb-10">Editar proveedor</h2>
         
@@ -56,8 +56,35 @@
             <a href="{{ route('proveedor.index') }}" class="bg-red-500 text-white font-bold py-4 hover:cursor-pointer px-10 rounded-lg hover:bg-red-600 transition duration-300">
                 Regresar
             </a>
-            <input type="submit" value="Actualizar" class="bg-blue-500 text-white font-bold py-4 hover:cursor-pointer px-10 rounded-lg hover:bg-blue-600 transition duration-300"/>
+            <input type="submit" value="Actualizar" class="enviar bg-blue-500 text-white font-bold py-4 hover:cursor-pointer px-10 rounded-lg hover:bg-blue-600 transition duration-300"/>
         </div>
     </form>
 </div>
 @endsection
+
+@stack('scripts')
+<script src="https://kit.fontawesome.com/aaef00cbdd.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const btnRegistrar=document.querySelector('.enviar');
+        console.log(btnRegistrar);
+        
+        btnRegistrar.addEventListener('click', (e) => {
+        e.preventDefault(); // Evitar el envío inmediato del formulario
+        Swal.fire({
+            title: "¿Seguro que quieres actualizar el proveedor?",
+            showDenyButton: true,
+            confirmButtonText: "Actualizar",
+            denyButtonText: `Cancelar`
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Envía el formulario de forma tradicional
+                document.querySelector('.proveedor').submit();
+            } else if (result.isDenied) {
+                Swal.fire("No se actualizo el proveedor", "", "info");
+            }
+        });
+    });
+    });
+</script>

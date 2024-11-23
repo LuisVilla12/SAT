@@ -27,7 +27,7 @@
             </select>
         </div>
         <p class="text-gray-500 mt-1"> ¿No se encuentra registrado el proveedor? 
-            <a href="{{ route('proveedor.create') }}" class="text-blue-600 font-semibold hover:underline">Regístrese Ahora</a>
+            <a href="{{ route('proveedor.create') }}" class="text-blue-600 font-semibold hover:underline">Registrarlo Ahora</a>
         </p>
         <div class="mb-6"></div>
     
@@ -51,15 +51,18 @@
             </select>
         </div>
 
+        {{-- Fecha de registro --}}
+        {{-- <input type="hidden" id="fecha_visita" name="fecha_visita"> --}}
+        <div class="mb-6">
+            <label for="" class="block text-gray-600 font-semibold mb-2">Fecha de visita:</label>
+            <input type="date"  id="fecha_visita" name="fecha_visita" class="px-4 py-2 block w-full rounded-lg shadow-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
+
         <!-- Hora de entrada -->
         <div class="mb-6">
             <label for="hora_entrada" class="block text-gray-600 font-semibold mb-2">Hora de entrada:</label>
             <input type="time" id="hora_entrada" min="08:00" max="15:00" name="hora_entrada" class="px-4 py-2 block w-full rounded-lg shadow-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400">
         </div>
-        {{-- Fecha de registro --}}
-        <input type="hidden" id="fecha_visita" name="fecha_visita">
-
-
         <!-- Botón de Enviar -->
         <div class="flex justify-center gap-5 mt-10">
             <a href="{{ route('admin.index') }}" class="bg-red-500 text-white font-bold py-4 hover:cursor-pointer px-10 rounded-lg hover:bg-red-600 transition duration-300">
@@ -120,6 +123,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const fechaActual = `${año}-${mes}-${dia}`;
     fechaRegistroInput.value = fechaActual;  // Establecer la fecha en el input
+    console.log(fechaRegistroInput.value);
+    
 });
 
 

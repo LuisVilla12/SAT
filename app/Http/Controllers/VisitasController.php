@@ -62,6 +62,7 @@ class VisitasController extends Controller
 
     public function edit(Visitas $visita){
         $proveedores=Proveedors::all();
+        // dd($visita->fecha_visita);
         return view('visitas.edit',['visita'=>$visita,'proveedores'=>$proveedores]);
     }
 
