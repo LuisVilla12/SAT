@@ -75,8 +75,8 @@
         </div>
         <!-- Botón de Enviar -->
         <div class="flex justify-center gap-5 mt-10">
-            <a href="{{ route('visitas.index') }}" class="bg-red-500 text-white font-bold py-4 hover:cursor-pointer px-10 rounded-lg hover:bg-red-600 transition duration-300">
-                Regresar
+            <a href="{{ route('visitas.index') }}" class="bg-red-500 text-white font-bold py-3 hover:cursor-pointer px-5   rounded-lg hover:bg-red-600 transition duration-300">
+                <img src="{{ asset('img/flecha.png') }}" class="w-6" alt="">
             </a>
             <input type="submit" value="Actualizar" class="enviar bg-blue-500 text-white font-bold py-4 hover:cursor-pointer px-10 rounded-lg hover:bg-blue-600 transition duration-300"/>
         </div>
@@ -101,21 +101,37 @@ document.addEventListener("DOMContentLoaded", function() {
     } else {
         timeInput.value = "08:00";  // Si no está dentro del rango, establece 08:00
     }
-
-    // btnRegistrar.addEventListener('click', (e) => {
-    // e.preventDefault(); // Evitar el envío inmediato del formulario
-    // Swal.fire({
-    //     title: "¿Seguro que quieres registrar la visita?",
-    //     showDenyButton: true,
-    //     confirmButtonText: "Registrar",
-    //     denyButtonText: `Cancelar`
-    // }).then((result) => {
-    //     if (result.isConfirmed) {
-    //         // Envía el formulario de forma tradicional
-    //         document.querySelector('.visitas').submit();
-    //     } else if (result.isDenied) {
-    //         Swal.fire("No se registró la visita", "", "info");
-    //     }
-    // });
+    btnRegistrar.addEventListener('click',(e)=>{
+        e.preventDefault();
+        Swal.fire({
+            title: "¿Seguro que quieres actualizar la visita?",
+            showDenyButton: true,
+            confirmButtonText: "Actualizar",
+            denyButtonText: `Cancelar`
+        }).then((result) => {
+        if (result.isConfirmed) {
+            // Envía el formulario de forma tradicional
+            document.querySelector('.visitas').submit();
+        } else if (result.isDenied) {
+            Swal.fire("No se registró la visita", "", "info");
+        }
+    });
+    })
 });
+
 </script>
+{{-- btnRegistrar.addEventListener('click', (e) => {
+    e.preventDefault(); // Evitar el envío inmediato del formulario
+    Swal.fire({
+        title: "¿Seguro que quieres registrar la visita?",
+        showDenyButton: true,
+        confirmButtonText: "Registrar",
+        denyButtonText: `Cancelar`
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Envía el formulario de forma tradicional
+            document.querySelector('.visitas').submit();
+        } else if (result.isDenied) {
+            Swal.fire("No se registró la visita", "", "info");
+        }
+    }); --}}

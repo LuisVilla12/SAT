@@ -12,20 +12,24 @@ class LoginController extends Controller
     // public function
     public function store(Request $request){
         // dd('autenticando');
-        $this->validate($request,[
-            'email'=>['required','email'],
+        $request->validate([
+            'username'=>['required'],
             'password'=>['required']
         ]);
+        $credentials = $request->only('username', 'password');
         // Si quiere que lo recuerde
         // dd($request->remember);
-
-        // Autenticar credenciales y coloca si quiere que se recuerde
-        if(!auth()->attempt($request->only('email','password'),$request->remember)){
-            return back()->with('mensaje','Credenciales incorrectas');
+         // Intentar autenticar al usuario
+        if (auth()->attempt($credentials)) {
+        // Inicio de sesión exitoso
+            return redirect()->route('visitas.create')->with('mensaje', 'Inicio de sesión exitoso');
         }
-        else{
-            // return redirect()->route('posts.index',['user'=>auth()->user()->username]);
-            return redirect()->route('index');
-        }
+        return back()->withErrors([
+            'mensaje' => 'Las credenciales proporcionadas son incorrectas.',
+        ]);
     }
+    public function logout(){
+        return view('auth.login');
+    }
+    
 }

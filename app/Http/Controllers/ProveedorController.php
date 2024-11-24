@@ -47,7 +47,6 @@ class ProveedorController extends Controller
             'type'=>$request->type,
             'state'=>$request->state
         ]);
-        $proveedores=Proveedors::all();
         return redirect()->route('proveedor.index');
     }
 }

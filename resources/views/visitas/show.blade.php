@@ -68,10 +68,10 @@
 
         <!-- Botón de Enviar -->
         <div class="flex justify-center gap-5 mt-10">
-            <a href="{{ route('visitas.index') }}" class="bg-red-500 text-white font-bold py-4 hover:cursor-pointer px-10 rounded-lg hover:bg-red-600 transition duration-300">
-                Regresar
+            <a href="{{ route('visitas.index') }}" class="bg-red-500 text-white font-bold py-3 hover:cursor-pointer px-5   rounded-lg hover:bg-red-600 transition duration-300">
+                <img src="{{ asset('img/flecha.png') }}" class="w-6" alt="">
             </a>
-            <a href="{{ route('visitas.generarPase',$visita->id) }}" class="bg-blue-500 text-white font-bold py-4 hover:cursor-pointer px-10 rounded-lg hover:bg-blue-600 transition duration-300">
+            <a href="{{ route('visitas.generarPase',$visita->id) }}" class="bg-blue-500 text-white font-bold py-3 hover:cursor-pointer px-10 rounded-lg hover:bg-blue-600 transition duration-300">
                 Mostrar pase
             </a>
         </div>

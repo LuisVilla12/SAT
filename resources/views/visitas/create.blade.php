@@ -11,9 +11,9 @@
         <div class="mb-6">
             <label for="name_persona" class="block text-gray-600 font-semibold mb-2">Nombre de la persona:</label>
             <input type="text" id="name_persona" name="name_persona" placeholder="Ingrese el nombre de la persona que visita" value="{{ old('name_persona') }}" 
-                class="px-4 py-2 block w-full rounded-lg shadow-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 @error('name') border-red-500 @enderror">
+                class="px-4 py-2 block w-full rounded-lg shadow-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 @error('name_persona') border-solid border-2 border-red-500 @enderror">
             @error('name_persona')
-                <p class="mx-1 mt-1 text-red-500">Debes ingresar un nombre de persona valido</p>
+                <p class="mx-1 mt-1 text-red-500">Debes ingresar un nombre de persona valido.</p>
             @enderror
         </div>
         <!-- Empresas -->
@@ -25,19 +25,24 @@
                     <option value="{{$proveedor->id}}">{{$proveedor->name_company}}</option>
                 @endforeach
             </select>
+            
         </div>
         <p class="text-gray-500 mt-1"> ¿No se encuentra registrado el proveedor? 
             <a href="{{ route('proveedor.create') }}" class="text-blue-600 font-semibold hover:underline">Registrarlo Ahora</a>
         </p>
+        @error('proveedors_id')
+            <p class="mx-1 mt-1 text-red-500">Debes seleccionar una empresa o registar una nueva empresa.</p>
+        @enderror
+
         <div class="mb-6"></div>
     
         <!-- Apellido Materno -->
         <div class="mb-6">
             <label for="motivo_visita" class="block text-gray-600 font-semibold mb-2">Motivo de visita:</label>
             <input type="text" id="motivo_visita" name="motivo_visita" placeholder="Ingrese el motivo de visita" value="{{ old('motivo_visita') }}" 
-                class="px-4 py-2 block w-full rounded-lg shadow-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 @error('lastnameM') border-red-500 @enderror">
+                class="px-4 py-2 block w-full rounded-lg shadow-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 @error('name_persona') border-solid border-2 border-red-500 @enderror">
             @error('motivo_visita')
-                <p class="mx-1 mt-1 text-red-500">Debes ingresar un motivo de visita valido</p>
+                <p class="mx-1 mt-1 text-red-500">Debes ingresar un motivo de visita valido.</p>
             @enderror
         </div>
         <div class="mb-5">
@@ -49,6 +54,9 @@
                 <option value="compras">Compras</option>
                 <option value="administracion">Administración</option>
             </select>
+            @error('area')
+            <p class="mx-1 mt-1 text-red-500">Debes ingresar un area de visita.</p>
+        @enderror
         </div>
 
         {{-- Fecha de registro --}}
@@ -64,11 +72,11 @@
             <input type="time" id="hora_entrada" min="08:00" max="15:00" name="hora_entrada" class="px-4 py-2 block w-full rounded-lg shadow-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400">
         </div>
         <!-- Botón de Enviar -->
-        <div class="flex justify-center gap-5 mt-10">
-            <a href="{{ route('admin.index') }}" class="bg-red-500 text-white font-bold py-4 hover:cursor-pointer px-10 rounded-lg hover:bg-red-600 transition duration-300">
-                Regresar
+        <div class="flex justify-evenly gap-5 mt-10">
+            <a href="{{ route('admin.index') }}" class="bg-red-500 text-white font-bold py-3 hover:cursor-pointer px-5   rounded-lg hover:bg-red-600 transition duration-300">
+                <img src="{{ asset('img/flecha.png') }}" class="w-6" alt="">
             </a>
-            <input type="submit" value="Registrar" class="enviar bg-blue-500 text-white font-bold py-4 hover:cursor-pointer px-10 rounded-lg hover:bg-blue-600 transition duration-300"/>
+            <input type="submit" value="Registrar" class="enviar bg-blue-500 text-white font-bold py-3 hover:cursor-pointer px-10 rounded-lg hover:bg-blue-600 transition duration-300"/>
         </div>
     </form>
 </div>
@@ -84,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function() {
     btnRegistrar.addEventListener('click', (e) => {
     e.preventDefault(); // Evitar el envío inmediato del formulario
     Swal.fire({
-        title: "¿Seguro que quieres registrar la visita?",
+        title: "¿Seguro que quieres registrar esta visita?",
         showDenyButton: true,
         confirmButtonText: "Registrar",
         denyButtonText: `Cancelar`
@@ -93,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function() {
             // Envía el formulario de forma tradicional
             document.querySelector('.visitas').submit();
         } else if (result.isDenied) {
-            Swal.fire("No se registró la visita", "", "info");
+            Swal.fire("No se registró esta visita", "", "info");
         }
     });
 });

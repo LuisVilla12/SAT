@@ -6,11 +6,10 @@
 @section('contenido')
     <div class=" container mx-auto ">
         <div class="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-            <h1 class="text-5xl font-bold text-center text-gray-800 mb-14 tracking-tight transition-all duration-300 hover:text-primary">
+            <h1 class="text-5xl uppercase font-bold text-center text-gray-800 mb-14 tracking-tight transition-all duration-300 hover:text-primary">
                 Administración
             </h1>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
-                
+            <div class="grid grid-cols-1 @php echo auth()->user()->type==1? 'md:grid-cols-3':'md:grid-cols-2' @endphp  items-center gap-8 text-center mt-16">
                 <!-- Opción de Proveedores -->
                 <button onclick="showProveedoresModal()" class="group p-12 bg-white rounded-lg shadow-lg hover:shadow-2xl transition duration-300 transform hover:scale-105">
                     <div class="flex flex-col items-center">
@@ -30,16 +29,16 @@
                         <span class="text-3xl font-semibold text-gray-700 group-hover:text-green-600">Gestión de visitas</span>
                     </div>
                 </button>
-                
-                <!-- Opción de Usuario -->
-                <button onclick="showUsuariosModal()" class="group p-12 bg-white rounded-lg shadow-lg hover:shadow-2xl transition duration-300 transform hover:scale-105">
-                    <div class="flex flex-col items-center">
-                        <!-- Icono de Usuario -->
-                        <li class="text-6xl text-amber-500 mb-4 fa-solid fa-users"></li>                                              
-                        <!-- Texto de Usuario -->
-                        <span class="text-3xl font-semibold text-gray-700 group-hover:text-amber-500">Gestión de usuarios</span>
-                    </div>
-                </button>
+                @if(auth()->user()->type==1)
+                    <button onclick="showUsuariosModal()" class="group p-12 bg-white rounded-lg shadow-lg hover:shadow-2xl transition duration-300 transform hover:scale-105">
+                        <div class="flex flex-col items-center">
+                            <!-- Icono de Usuario -->
+                            <li class="text-6xl text-amber-500 mb-4 fa-solid fa-users"></li>                                              
+                            <!-- Texto de Usuario -->
+                            <span class="text-3xl font-semibold text-gray-700 group-hover:text-amber-500">Gestión de usuarios</span>
+                        </div>
+                    </button>
+                @endif
                 
             </div>
         </div>
@@ -126,12 +125,12 @@
             } else if (result.isDenied) {
                 // Opción de "Consultar proveedor"
                 Swal.fire(
-                    'Consultar proveedor',
+                    'Consultar usuarios',
                     'Será redirigido a la sección de consulta.',
                     'info'
                 );
                 setTimeout(() => {
-                    window.location.href = '/consultar-proveedor'; // Cambia esta URL según corresponda
+                    window.location.href = '/usuarios'; // Cambia esta URL según corresponda
                 }, 2000);
                 // Redirigir a la sección de consulta de proveedor
             } else if (result.isDismissed) {

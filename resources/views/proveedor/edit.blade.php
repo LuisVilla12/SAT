@@ -15,7 +15,7 @@
             <input type="text" id="name_persona" name="name_persona" required placeholder="Ingrese el nombre de la persona" 
                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500  @error('name_persona') border-solid border-2 border-red-500 @enderror" value="{{ $proveedor->name_persona}}">
                 @error('name_persona')
-                    <p class="mx-1 mt-1 text-red-500">Debes ingresar un nombre de persona valido</p>
+                    <p class="mx-1 mt-1 text-red-500">Debes ingresar un nombre de persona valido.</p>
                 @enderror
         </div>
         
@@ -25,7 +25,7 @@
             <input type="text" id="name_company" name="name_company" required placeholder="Ingrese el nombre de la empresa" 
                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500  @error('name_company') border-solid border-2 border-red-500 @enderror" value="{{ $proveedor->name_company}}">
                 @error('name_company')
-                    <p class="mx-1 mt-1 text-red-500">Debes ingresar un nombre de empresa valido</p>
+                    <p class="mx-1 mt-1 text-red-500">Debes ingresar un nombre de empresa valido.</p>
                 @enderror
             </div>
         
@@ -39,6 +39,9 @@
                 <option @php echo $proveedor->type =='compras' ? 'selected':''; @endphp value="compras">Compras</option>
                 <option @php echo $proveedor->type =='administracion' ? 'selected':''; @endphp value="administracion">Administración</option>
             </select>
+            @error('type')
+                <p class="mx-1 mt-1 text-red-500">Debes seleccionar un área de la empresa valida.</p>
+            @enderror
         </div>
 
         <!-- Estado -->
@@ -52,11 +55,11 @@
         </div>
         
         <!-- Botón de Enviar -->
-        <div class="flex justify-center gap-5 mt-10">
-            <a href="{{ route('proveedor.index') }}" class="bg-red-500 text-white font-bold py-4 hover:cursor-pointer px-10 rounded-lg hover:bg-red-600 transition duration-300">
-                Regresar
+        <div class="flex justify-evenly gap-5 mt-10">
+            <a href="{{ route('proveedor.index') }}" class="bg-red-500 text-white font-bold py-3 hover:cursor-pointer px-5   rounded-lg hover:bg-red-600 transition duration-300">
+                <img src="{{ asset('img/flecha.png') }}" class="w-6" alt="">
             </a>
-            <input type="submit" value="Actualizar" class="enviar bg-blue-500 text-white font-bold py-4 hover:cursor-pointer px-10 rounded-lg hover:bg-blue-600 transition duration-300"/>
+            <input type="submit" value="Actualizar" class="enviar bg-blue-500 text-white font-bold py-3 hover:cursor-pointer px-10 rounded-lg hover:bg-blue-600 transition duration-300"/>
         </div>
     </form>
 </div>
@@ -73,7 +76,7 @@
         btnRegistrar.addEventListener('click', (e) => {
         e.preventDefault(); // Evitar el envío inmediato del formulario
         Swal.fire({
-            title: "¿Seguro que quieres actualizar el proveedor?",
+            title: "¿Seguro que quieres actualizar este proveedor?",
             showDenyButton: true,
             confirmButtonText: "Actualizar",
             denyButtonText: `Cancelar`
@@ -82,7 +85,7 @@
                 // Envía el formulario de forma tradicional
                 document.querySelector('.proveedor').submit();
             } else if (result.isDenied) {
-                Swal.fire("No se actualizo el proveedor", "", "info");
+                Swal.fire("No se actualizo este proveedor", "", "info");
             }
         });
     });

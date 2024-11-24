@@ -7,9 +7,9 @@
 <div class="flex items-center justify-center min-h-screen bg-gray-100 p-6">
     <div class="w-full max-w-7xl bg-white p-14 shadow-lg rounded-lg overflow-hidden">
         <h2 class="text-4xl font-bold text-center text-gray-700 mb-10"> Historial de visitas</h2>
-
+        @if(count($visitas)>0)
         <!-- Filtros y buscador -->
-        <div class="flex flex-wrap justify-between gap-6 mb-6">
+        <div class="flex  justify-between gap-5 mb-6">
             <!-- Buscar por nombre -->
             <input id="searchInput" type="text" placeholder="Buscar por nombre"
                 class="px-4 py-2 border border-gray-300 rounded-lg shadow-md w-full md:w-1/3 focus:outline-none focus:ring-2 focus:ring-blue-400">
@@ -57,31 +57,33 @@
                     <td class="py-4 px-4">{{ $visita->hora_salida == '00:00:00' ? 'Sin registro' : $visita->hora_salida }}</td>
                     <td class="py-4 px-4">
                         @if ($visita->hora_salida == '00:00:00')
-                        <a href="{{ route('visitas.edit', $visita) }}" class="bg-yellow-500 text-white font-bold py-2 px-5 rounded-full hover:bg-yellow-500 transition duration-200">
-                            Pendiente
+                        <a href="{{ route('visitas.edit', $visita) }}" class="flex place-items-center text-white font-bold py-3 px-5 rounded-full hover:transition duration-200">
+                            <img src="{{ asset('img/pendiente.png') }}" class="w-6 mx-auto" alt="">
                         </a>
                         @else
-                        <a href="{{ route('visitas.show', $visita) }}" class="bg-green-700 text-white font-bold py-2 px-9 rounded-full hover:bg-green-900 transition duration-200">
-                            Ver
-                        </a>
+                            <a href="{{ route('visitas.show', $visita) }}" class="flex place-items-center  text-white font-bold py-3 rounded-full hover:transition duration-200">
+                                <img src="{{ asset('img/ojo.png') }}" class="w-6 mx-auto" alt="">
+                            </a>
                         @endif
                     </td>
-                    <td class="py-4 px-4">
+                    {{-- <td class="py-4 px-4"> --}}
                         {{-- <a href="{{ route('visitas.generarPase',$visita->id) }}" class="bg-blue-500 text-white font-bold py-2 px-9 rounded-full hover:bg-blue-500 transition duration-200">
                             Generar
                         </a> --}}
-                    </td>
+                    {{-- </td> --}}
                 </tr>
                 @endforeach
             </tbody>
         </table>
-
+        @else
+            <p class="text-center text-xl my-28">No hay visitas registradas.</p>
+        @endif
         <div class="flex justify-center gap-5 mt-7">
-            <a href="{{ route('admin.index') }}" class="bg-red-500 text-white font-bold py-4 hover:cursor-pointer px-10 rounded-lg hover:bg-red-600 transition duration-300">
-                Regresar
+            <a href="{{ route('admin.index') }}" class="bg-red-500 text-white font-bold py-3 hover:cursor-pointer px-5   rounded-lg hover:bg-red-600 transition duration-300">
+                <img src="{{ asset('img/flecha.png') }}" class="w-6" alt="">
             </a>
-            <a href="{{ route('visitas.create') }}" class="bg-blue-500 text-white font-bold py-4 hover:cursor-pointer px-10 rounded-lg hover:bg-blue-600 transition duration-300">
-                Registrar
+            <a href="{{ route('visitas.create') }}" class="bg-blue-500 text-white font-bold py-3 hover:cursor-pointer px-10 rounded-lg hover:bg-blue-600 transition duration-300">
+                Registrar nueva visita
             </a>
         </div>
     </div>

@@ -15,7 +15,7 @@
             <input type="text" id="name_persona" name="name_persona" required placeholder="Ingrese el nombre de la persona" 
                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500  @error('name_persona') border-solid border-2 border-red-500 @enderror" value="{{ old('name_persona') }}">
                 @error('name_persona')
-                    <p class="mx-1 mt-1 text-red-500">Debes ingresar un nombre de persona valido</p>
+                    <p class="mx-1 mt-1 text-red-500">Debes ingresar un nombre de persona valido.</p>
                 @enderror
         </div>
         
@@ -25,7 +25,7 @@
             <input type="text" id="name_company" name="name_company" required placeholder="Ingrese el nombre de la empresa" 
                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500  @error('name_company') border-solid border-2 border-red-500 @enderror" value="{{ old('name_company') }}">
                 @error('name_company')
-                    <p class="mx-1 mt-1 text-red-500">Debes ingresar un nombre de empresa valido</p>
+                    <p class="mx-1 mt-1 text-red-500">Debes ingresar un nombre de empresa valido.</p>
                 @enderror
             </div>
         
@@ -40,17 +40,21 @@
                 <option value="administracion">Administración</option>
             </select>
             @error('type')
-            <p class="mx-1 mt-1 text-red-500">Debes seleccionar un área de la empresa valida</p>
+            <p class="mx-1 mt-1 text-red-500">Debes seleccionar un área de la empresa valida.</p>
         @enderror
         </div>
         
         <!-- Botón de Enviar -->
-        <div class="flex justify-between gap-5 mt-10">
+        <div class="flex justify-evenly gap-5 mt-10">
             <a href="{{ route('admin.index') }}" class="bg-red-500 text-white font-bold py-3 hover:cursor-pointer px-5   rounded-lg hover:bg-red-600 transition duration-300">
-                <img src="{{ asset('build/img/flecha.png') }}" class="w-6" alt="">
+                <img src="{{ asset('img/flecha.png') }}" class="w-6" alt="">
             </a>
             <input type="submit"  value="Registrar" class="enviar bg-blue-500 text-white font-bold py-3 hover:cursor-pointer px-10 rounded-lg hover:bg-blue-600 transition duration-300"/>
         </div>
+        {{-- <a href="{{ route('admin.index') }}" class="inline-block bg-red-500 text-white font-bold py-3 hover:cursor-pointer px-5 px-6  rounded-lg hover:bg-red-600 transition duration-300">
+                <img src="{{ asset('img/flecha.png') }}" class="w-6" alt="">
+            </a> --}}
+        
     </form>
 </div>
 @endsection
@@ -60,12 +64,12 @@
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const btnRegistrar=document.querySelector('.enviar');
-        console.log(btnRegistrar);
+        // console.log(btnRegistrar);
         
         btnRegistrar.addEventListener('click', (e) => {
         e.preventDefault(); // Evitar el envío inmediato del formulario
         Swal.fire({
-            title: "¿Seguro que quieres registrar el proveedor?",
+            title: "¿Seguro que quieres registrar este nuevo proveedor?",
             showDenyButton: true,
             confirmButtonText: "Registrar",
             denyButtonText: `Cancelar`
