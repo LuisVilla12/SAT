@@ -114,10 +114,10 @@ document.addEventListener("DOMContentLoaded", function() {
     const currentTime = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
 
     // Asegúrate de que la hora esté dentro del rango permitido (08:00 a 15:00)
-    if (currentTime >= "08:00" && currentTime <= "16:00") {
+    if (currentTime >= "06:00" && currentTime <= "22:00") {
         timeInput.value = currentTime;  // Establece la hora actual si está dentro del rango
     } else {
-        timeInput.value = "08:00";  // Si no está dentro del rango, establece 08:00
+        timeInput.value = "06:00";  // Si no está dentro del rango, establece 08:00
     }
 
     // Establecer la fecha actual en el input de fecha
