@@ -15,7 +15,7 @@ class VisitasController extends Controller
 {
     //
     public function index(){
-    $visitas = Visitas::with('proveedors')->orderBy('id', 'asc')->get();
+    $visitas = Visitas::with('proveedors')->orderBy('fecha_visita', 'asc')->get();
     //     $visitas = DB::table('visitas')->join('proveedors', 'proveedors.id', '=', 'visitas.proveedors_id')->select(
     //     'visitas.id',
     //     'visitas.name_persona',
