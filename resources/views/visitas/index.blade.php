@@ -75,6 +75,9 @@
                 @endforeach
             </tbody>
         </table>
+        <div class="mt-6 bg-white">
+            {{ $visitas->links() }}
+        </div>
         @else
             <p class="text-center text-xl my-28">No hay visitas registradas.</p>
         @endif

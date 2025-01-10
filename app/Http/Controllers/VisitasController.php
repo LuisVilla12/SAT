@@ -13,9 +13,6 @@ use Mpdf\Mpdf;
 
 class VisitasController extends Controller
 {
-    //
-    public function index(){
-    $visitas = Visitas::with('proveedors')->orderBy('fecha_visita', 'asc')->get();
     //     $visitas = DB::table('visitas')->join('proveedors', 'proveedors.id', '=', 'visitas.proveedors_id')->select(
     //     'visitas.id',
     //     'visitas.name_persona',
@@ -26,6 +23,9 @@ class VisitasController extends Controller
     //     'visitas.hora_salida'
     // )->orderBy('visitas.id', 'desc')->get()->toArray();
     // dd($visitas);
+    public function index(){
+        
+        $visitas = Visitas::with('proveedors')->orderBy('fecha_visita', 'desc')->paginate(5);
         return view('visitas.index',['visitas'=>$visitas]);
     }
 
@@ -105,17 +105,28 @@ public function generarPase($id)
     $proveedor=Proveedors::findOrFail($proveedor_id);
     // $nombreProveedor=$proveedor->name_company;
     // Crea el contenido HTML del PDF
+
     $html = view('visitas.pase', ['registro'=>$registro, 'proveedor'=>$proveedor])->render();
+    // dd($html);
+
 
     // Instancia de Mpdf
-    $mpdf = new Mpdf();
+    // $mpdf = new Mpdf();
+
+    $mpdf = new \Mpdf\Mpdf([
+        'mode' => 'utf-8',
+        'format' => 'A4',
+        'default_font_size' => 12,
+        'default_font' => 'Arial',
+    ]);
 
     // Escribe el contenido en el PDF
     $mpdf->WriteHTML($html);
 
     // Descargar el PDF con un nombre personalizado
     $filename = 'PaseDeVisita_' .$registro->fecha_visita.'_'. $registro->id . '.pdf';
-    return response()->make($mpdf->Output($filename, 'D'), 200, [
+    // D es para descargar
+    return response()->make($mpdf->Output($filename, 'I'), 200, [
         'Content-Type' => 'application/pdf',
         'Content-Disposition' => 'inline; filename="' . $filename . '"'
     ]);

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Bienes y Equipo de Cómputo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="">
+    <div class="mx-10 my-5">
+        <div style="overflow: hidden;">
+            <img src="../../../public/img/header.png" style="width: 50%; float: left;" alt="">
+            <div style="text-align: right; font-size: 9px; float: right;">
+                <p>Administracion General de Recursos y Servicios</p>
+                <p>Administración Central de Operación de Recursos y Servicios</p>
+                <p>Administración de Operación de Recursos y Servicios “4”</p>
+                <p>Subadministración de Recursos y Servicios en Veracruz</p>
+                <p>Departamento de Bienes y Servicios</p>
+            </div>
+        </div>
+    </div>
+    <div class="text-center mb-3">
+        <h2 class="text-2xl font-bold text-gray-700">REGISTRO DE ENTRADA</h2>
+    </div>
+
+    <form class="bg-white p-6 rounded-lg shadow-md max-w-4xl mx-auto">
+        <!-- Tabla para la sección de Fecha y Nombre -->
+        <table style="width: 100%; border-spacing: 10px;">
+            <tr>
+                <td style="width: 50%; padding: 10px;">
+                    <label for="fecha" class="block text-sm font-medium text-gray-700 uppercase mb-4">Fecha:</label>
+                    <label for="nombre" class="block text-sm font-medium text-gray-700 uppercase">Nombre:</label>
+                </td>
+                <td style="width: 50%; padding: 10px;">
+                    <p class="block text-sm font-medium text-gray-700 uppercase mb-4">Administración: ADSC DE VERACRUZ 1</p>
+                    <p class="block text-sm font-medium text-gray-700 uppercase">Área: SERVICIOS AL CONTRIBUYENTE</p>
+                </td>
+            </tr>
+        </table>
+
+        <!-- Observaciones -->
+        <div style="margin-bottom: 20px;">
+            <label for="observaciones" class="block text-sm font-medium text-gray-700 uppercase">Observaciones:</label>
+            <textarea id="observaciones" name="observaciones" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring focus:ring-blue-300" rows="3"></textarea>
+        </div>
+
+        <!-- Tabla para la sección de Hora Entrada y Hora Salida -->
+        <table style="width: 100%; border-spacing: 10px;">
+            <tr>
+                <td style="width: 50%; padding: 10px;">
+                    <label for="hora_entrada" class="block text-sm font-medium text-gray-700 uppercase">Hora Entrada:</label>
+                </td>
+                <td style="width: 50%; padding: 10px;">
+                    <label for="hora_salida" class="block text-sm font-medium text-gray-700 uppercase">Hora Salida:</label>
+                </td>
+            </tr>
+        </table>
+
+        <!-- Firmas -->
+        <table style="width: 100%; border-spacing: 10px; margin-top: 40px;">
+            <tr>
+                <td style="width: 25%; text-align: center;">
+                    <label for="">_________________________</label>
+                    <label style="font-size: 13px;" class="block text-center font-medium text-gray-700 uppercase">Firma del portador al ingresar</label>
+                </td>
+                <td style="width: 25%; text-align: center;">
+                    <label for="">_________________________</label>
+                    <label style="font-size: 13px;" class="block text-center font-medium text-gray-700 uppercase">Firma del portador al salir</label>
+                </td>
+                <td style="width: 25%; text-align: center;">
+                    <label for="">_________________________</label>
+                    <label style="font-size: 13px;" class="block text-center font-medium text-gray-700 uppercase">Nombre y firma de revisión guardia de seguridad (Ingreso)</label>
+                </td>
+                <td style="width: 25%; text-align: center;">
+                    <label for="">_________________________</label>
+                    <label style="font-size: 13px;" class="block text-center font-medium text-gray-700 uppercase">Nombre y firma de revisión guardia de seguridad (Salida)</label>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

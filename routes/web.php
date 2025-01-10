@@ -17,6 +17,7 @@ Route::get('/administracion', [AdminController::class,'index'])->name('admin.ind
 
 
 // Usuarios
+// Route::get('/registro-usuario',[ RegisterController::class,'create'])->name('auth.create')->middleware('auth','check.usertype');
 Route::get('/registro-usuario',[ RegisterController::class,'create'])->name('auth.create')->middleware('auth','check.usertype');
 Route::post('/registro-usuario',[ RegisterController::class,'store']);
 Route::get('/usuarios',[ RegisterController::class,'index'])->name('auth.index')->middleware('auth','check.usertype');

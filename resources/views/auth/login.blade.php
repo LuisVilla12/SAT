@@ -39,12 +39,12 @@
             <label for="sesion" class="text-gray-500">Mantener la sesión abierta</label>
         </div>
 
-        <!-- Enlace para registro -->
-        {{-- <p class="my-8 text-center text-gray-500">
+        {{-- <!-- Enlace para registro -->
+        <p class="my-8 text-center text-gray-500">
             ¿No tiene una cuenta? 
-            <a href="{{ route('register.create') }}" class="text-blue-600 font-semibold hover:underline">Regístrese Ahora</a>
-        </p> --}}
-        
+            <a href="" class="text-blue-600 font-semibold hover:underline">Regístrese Ahora</a>
+        </p> 
+        --}}
         <!-- Botón de inicio de sesión -->
         <div class="grid place-items-center mt-8">
             <button type="submit" class=" uppercase font-bold bg-blue-700 text-white py-4 px-10 shadow-md hover:bg-blue-700 transition duration-300 ease-in-out cursor-pointer rounded-md">

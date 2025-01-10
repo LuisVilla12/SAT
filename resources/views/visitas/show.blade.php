@@ -37,10 +37,13 @@
             <label for="area" class="block text-gray-600 font-semibold mb-2">Area de visita:</label>
             <select id="area" name="area" required disabled class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" >
                 <option value=""  selected>Seleccione una area de visita</option>
-                <option  @php echo $visita->area =='ventas' ? 'selected':''; @endphp  value="ventas">Ventas</option>
-                <option  @php echo $visita->area =='computacion' ? 'selected':''; @endphp value="computacion">Computación</option>
-                <option  @php echo $visita->area =='compras' ? 'selected':''; @endphp value="compras">Compras</option>
-                <option  @php echo $visita->area =='administracion' ? 'selected':''; @endphp value="administracion">Administración</option>
+                <option @php echo $visita->area =='Servicios al Contribuyente' ? 'selected':''; @endphp value="Servicios al Contribuyente">Servicios al Contribuyente</option>
+                <option @php echo $visita->area =='Alti' ? 'selected':''; @endphp value="Alti">Alti</option>
+                <option @php echo $visita->area =='Recaudación' ? 'selected':''; @endphp value="Recaudación">Recaudación</option>
+                <option @php echo $visita->area =='Jurídico' ? 'selected':''; @endphp value="Jurídico">Jurídico</option>
+                <option @php echo $visita->area =='Auditoría' ? 'selected':''; @endphp value="Auditoría">Auditoría</option>
+                <option @php echo $visita->area =='Recursos humanos' ? 'selected':''; @endphp value="Recursos humanos">Recursos humanos</option>
+
             </select>
         </div>
 
