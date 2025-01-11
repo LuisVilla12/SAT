@@ -7,7 +7,7 @@
 
 <div class="flex items-center justify-center min-h-screen bg-gray-100 p-6">
     <div class="w-full max-w-6xl bg-white p-14 shadow-lg rounded-lg overflow-hidden">
-        <h2 class="text-4xl font-bold text-center text-gray-700 mb-10 uppercase">Gestión de usuarios</h2>
+        <h2 class="text-4xl font-bold text-center text-gray-700 mb-10">Gestión de Usuarios</h2>
         @if(count($usuarios)>0)
         <!-- Barra de búsqueda y filtro -->
         <div class="flex justify-between items-center mb-5">
@@ -63,6 +63,9 @@
                 @endforeach
             </tbody>
         </table>
+        <div class="mt-6 bg-white">
+            {{ $usuarios->links() }}
+        </div>
         @else
             <p class="text-center text-xl my-28">No hay usuarios registrados.</p>
         @endif

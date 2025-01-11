@@ -14,7 +14,7 @@ class RegisterController extends Controller
     //
 
     public function index(){
-        $usuarios=User::all();
+        $usuarios=User::paginate(6);
         return view('auth.index',['usuarios'=>$usuarios]);
     }
     public function create(){

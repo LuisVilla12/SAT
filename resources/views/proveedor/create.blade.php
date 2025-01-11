@@ -34,10 +34,12 @@
             <label for="type" class="block text-gray-600 font-semibold mb-2">Área:</label>
             <select id="type" name="type" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 @error('type') border-solid border-2 border-red-500  @enderror">
                 <option value="" disabled selected>Seleccione un área</option>
-                <option value="ventas">Ventas</option>
-                <option value="computacion">Computación</option>
-                <option value="compras">Compras</option>
-                <option value="administracion">Administración</option>
+                <option value="Servicios al Contribuyente">Servicios al Contribuyente</option>
+                <option value="Alti">Alti</option>
+                <option value="Recaudación">Recaudación</option>
+                <option value="Jurídico">Jurídico</option>
+                <option value="Auditoría">Auditoría</option>
+                <option value="Recursos humanos">Recursos humanos</option>
             </select>
             @error('type')
             <p class="mx-1 mt-1 text-red-500">Debes seleccionar un área de la empresa valida.</p>

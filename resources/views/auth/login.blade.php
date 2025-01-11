@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal de Acceso</title>
-    <link rel="stylesheet" href="{{ asset('build/assets/app-GCesuJSx.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/assets/app-DvYtEOEK.css') }}">
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
@@ -50,7 +50,7 @@
                 <p class="mx-1 mt-1 mb-2 text-red-500 text-center">Error al iniciar sesión: Usuario y/o contraseñas incorrectas.</p>
                 @endif
                 <button type="submit"
-                    class="w-full px-4 my-5 py-2 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 uppercase">Iniciar
+                    class="cursor-pointer w-full px-4 my-5 py-2 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 uppercase">Iniciar
                     Sesión</button>
             </form>
         </div>

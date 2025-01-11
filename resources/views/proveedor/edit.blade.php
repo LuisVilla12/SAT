@@ -34,10 +34,13 @@
             <label for="type" class="block text-gray-600 font-semibold mb-2">Área:</label>
             <select id="type" name="type" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 @error('type') border-solid border-2 border-red-500  @enderror">
                 <option value="" disabled selected>Seleccione un área</option>
-                <option @php echo $proveedor->type =='ventas' ? 'selected':''; @endphp value="ventas">Ventas</option>
-                <option @php echo $proveedor->type =='computacion' ? 'selected':''; @endphp value="computacion">Computación</option>
-                <option @php echo $proveedor->type =='compras' ? 'selected':''; @endphp value="compras">Compras</option>
-                <option @php echo $proveedor->type =='administracion' ? 'selected':''; @endphp value="administracion">Administración</option>
+                <option @php echo $visita->area =='Servicios al Contribuyente' ? 'selected':''; @endphp value="Servicios al Contribuyente">Servicios al Contribuyente</option>
+                <option @php echo $visita->area =='Alti' ? 'selected':''; @endphp value="Alti">Alti</option>
+                <option @php echo $visita->area =='Recaudación' ? 'selected':''; @endphp value="Recaudación">Recaudación</option>
+                <option @php echo $visita->area =='Jurídico' ? 'selected':''; @endphp value="Jurídico">Jurídico</option>
+                <option @php echo $visita->area =='Auditoría' ? 'selected':''; @endphp value="Auditoría">Auditoría</option>
+                <option @php echo $visita->area =='Recursos humanos' ? 'selected':''; @endphp value="Recursos humanos">Recursos humanos</option>
+
             </select>
             @error('type')
                 <p class="mx-1 mt-1 text-red-500">Debes seleccionar un área de la empresa valida.</p>

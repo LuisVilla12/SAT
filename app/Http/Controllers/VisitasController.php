@@ -25,7 +25,7 @@ class VisitasController extends Controller
     // dd($visitas);
     public function index(){
         
-        $visitas = Visitas::with('proveedors')->orderBy('fecha_visita', 'desc')->paginate(5);
+        $visitas = Visitas::with('proveedors')->orderBy('fecha_visita', 'desc')->paginate(6);
         return view('visitas.index',['visitas'=>$visitas]);
     }
 
@@ -126,7 +126,7 @@ public function generarPase($id)
     // Descargar el PDF con un nombre personalizado
     $filename = 'PaseDeVisita_' .$registro->fecha_visita.'_'. $registro->id . '.pdf';
     // D es para descargar
-    return response()->make($mpdf->Output($filename, 'I'), 200, [
+    return response()->make($mpdf->Output($filename, 'D'), 200, [
         'Content-Type' => 'application/pdf',
         'Content-Disposition' => 'inline; filename="' . $filename . '"'
     ]);
