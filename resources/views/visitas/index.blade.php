@@ -1,4 +1,9 @@
 @extends('layout.app')
+
+@push('styles')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+@endpush
+
 @section('title')
     Historial de visitas
 @endsection
@@ -6,21 +11,26 @@
 @section('contenido')
 <div class="flex items-center justify-center min-h-screen bg-gray-100 p-6">
     <div class="w-full max-w-7xl bg-white p-14 shadow-lg rounded-lg overflow-hidden">
-        <h2 class="text-4xl font-bold text-center text-gray-700 mb-10"> Historial de visitas</h2>
+        <h2 class="text-4xl font-bold text-left text-gray-700 mb-10"> Historial de visitas</h2>
         @if(count($visitas)>0)
         <!-- Filtros y buscador -->
-        <div class="flex  justify-between gap-5 mb-6">
+        <div class="grid grid-cols-3 gap-3 mb-6">
             <!-- Buscar por nombre -->
-            <input id="searchInput" type="text" placeholder="Buscar por nombre"
-                class="px-4 py-2 border border-gray-300 rounded-lg shadow-md w-full md:w-1/3 focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <div class="flex items-center">
+                <span class="absolute pl-3 text-gray-400">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </span>
+                <input id="searchInput" type="text" placeholder="Buscar por nombre o por empresa"
+                    class="px-4  pl-10 py-2  border border-gray-300 rounded-lg shadow-md w-full  focus:outline-none focus:ring-2 focus:ring-blue-400">
+            </div>
             
             <!-- Filtrar por fecha -->
             <input id="dateFilter" type="date"
-                class="px-4 py-2 border border-gray-300 rounded-lg shadow-md w-full md:w-1/3 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                class="px-4 py-2 border border-gray-300 rounded-lg shadow-md w-full focus:outline-none focus:ring-2 focus:ring-blue-400">
             
             <!-- Filtrar por hora de salida -->
             <select id="exitHourFilter"
-                class="px-4 py-2 border border-gray-300 rounded-lg shadow-md w-full md:w-1/3 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                class="px-4 py-2 border border-gray-300 rounded-lg shadow-md w-full focus:outline-none focus:ring-2 focus:ring-blue-400">
                 <option value="">Hora de salida</option>
                 <option value="00:00:00">Sin registro</option>
                 <option value="registrada">Registradas</option>
@@ -30,7 +40,7 @@
         <!-- Tabla de visitas -->
         <table class="min-w-full bg-white">
             <thead>
-                <tr class="bg-blue-600 text-white text-left">
+                <tr class="border border-gray-300 rounded-lg ">
                     <th class="py-3 px-4 uppercase text-center font-semibold text-sm">ID</th>
                     <th class="py-3 px-4 uppercase text-center font-semibold text-sm">Nombre</th>
                     <th class="py-3 px-4 uppercase text-center font-semibold text-sm">Proveedor</th>
@@ -47,7 +57,9 @@
                 <tr class="border-b border-gray-200 hover:bg-gray-100 transition duration-150"
                     data-name="{{ $visita->name_persona }}"
                     data-date="{{ $visita->fecha_visita }}"
+                    data-company="{{ $visita->proveedors->name_company }}"
                     data-exit-hour="{{ $visita->hora_salida }}">
+                    
                     <td class="py-4 px-4">{{ $visita->id }}</td>
                     <td class="py-4 px-4">{{ $visita->name_persona }}</td>
                     <td class="py-4 px-4">{{ $visita->proveedors->name_company }}</td>
@@ -111,9 +123,10 @@ document.addEventListener("DOMContentLoaded", () => {
         tableRows.forEach(row => {
             const name = row.getAttribute("data-name").toLowerCase();
             const date = row.getAttribute("data-date");
+            const company = row.getAttribute("data-company").toLowerCase();
             const exitHour = row.getAttribute("data-exit-hour");
 
-            let matchesSearch = name.includes(searchText);
+            let matchesSearch = name.includes(searchText) || company.includes(searchText);
             let matchesDate = selectedDate === "" || date === selectedDate;
             let matchesExitHour = selectedExitHour === "" ||
                 (selectedExitHour === "00:00:00" && exitHour === "00:00:00") ||

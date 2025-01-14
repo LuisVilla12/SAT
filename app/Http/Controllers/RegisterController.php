@@ -42,7 +42,7 @@ class RegisterController extends Controller
             'lastnameM'=>$request->lastnameM,
             'email'=>$request->email,
             'type'=>$request->type,
-            'puesto'=>'DUDA',
+            'state'=>'1',
             'password'=>Hash::make($request->password)
         ]);
         return redirect()->route('auth.index');
@@ -62,6 +62,7 @@ class RegisterController extends Controller
             'email'=>['required','min:10'],
             'company'=>['required','min:3'],
             'type'=>['required'],
+            'state'=>['required'],
         ]);
         $usuarioA= User::find($request->id); // Verifica que realmente obtienes un usuario.
         $usuarioA->update([
@@ -72,7 +73,7 @@ class RegisterController extends Controller
             'lastnameM'=>$request->lastnameM,
             'email'=>$request->email,
             'type'=>$request->type,
-            'puesto'=>'DUDA',
+            'state'=>$request->state,
         ]);
         // dd($usuario);
         return redirect()->route('auth.index');

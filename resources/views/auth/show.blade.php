@@ -75,8 +75,23 @@
             </select>
             @error('type')
             <p class="mx-1 mt-1 text-red-500">Debes seleecionar el tipo de usuario.</p>
-        @enderror
+            @enderror
         </div>
+
+        <div>
+            <label for="state" class="block text-gray-600 font-semibold mb-2">Estado del usuario:</label>
+            <select id="state" name="state" disabled required
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 @error('type') border-solid border-2 border-red-500  @enderror">
+                <option value="" disabled selected>Seleccione un tipo de usuario</option>
+                <option @php echo $usuario->state =='1' ? 'selected':''; @endphp value="1">Activo
+                </option>
+                <option @php echo $usuario->state =='0' ? 'selected':''; @endphp value="0">Inactivo</option>
+            </select>
+            @error('state')
+                <p class="mx-1 mt-1 text-red-500">Debes seleecionar el tipo de usuario.</p>
+            @enderror
+        </div>
+
         <!-- Botón de Enviar -->
         <div class="flex justify-center gap-5 mt-10">
             <a href="{{ route('auth.index') }}" class="bg-red-500 text-white font-bold py-3 hover:cursor-pointer px-5   rounded-lg hover:bg-red-600 transition duration-300">

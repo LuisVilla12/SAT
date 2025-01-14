@@ -26,7 +26,7 @@ class User extends Authenticatable
         'password',
         'type',
         'company',
-        'puesto'
+        'state'
     ];
 
     /**
