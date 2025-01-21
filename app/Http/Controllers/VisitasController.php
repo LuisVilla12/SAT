@@ -44,6 +44,7 @@ class VisitasController extends Controller
             'fecha_visita'=>'required',
             'hora_entrada'=>' required | min:3',
         ]);
+        
         Visitas::create([
             'name_persona'=>$request->name_persona,
             'proveedors_id'=>$request->proveedors_id,

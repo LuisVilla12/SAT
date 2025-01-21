@@ -108,9 +108,60 @@
                     </div>
                 </div>
                 @endif
-                <!-- Opcion: Servicio Social -->
-    
-    
+{{-- Opción estudiantes --}}
+<div class="border-b border-gray-200">
+    <button onclick="toggleSection('estudiantes')" class="flex items-center justify-between w-full p-4">
+        <div class="flex items-center">
+            <div class="bg-green-100 text-green-600 p-2 rounded-full mr-4">
+                <i class="fas fa-calendar-check fa-lg"></i>
+            </div>
+            <h2 class="text-lg font-semibold text-gray-800">Gestión de estudiantes</h2>
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" id="icon-estudiantes"
+            class="h-5 w-5 text-gray-500 transition-transform duration-300" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+    </button>
+    <div id="section-estudiantes" class="overflow-hidden max-h-0 opacity-0 slide-down">
+        <p class="text-sm text-gray-600 px-4">Gestione las visitas y acceda al historial de servicio social.</p>
+        <div class="p-4">
+            <button
+            onclick="showEstudiantesModal()"
+                class="cursor-pointer bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-green-600">
+                Acceder
+            </button>
+        </div>
+    </div>
+</div>
+
+                <!-- Opcion: Servicio Social Bitacora -->
+                <div class="border-b border-gray-200">
+                    <button onclick="toggleSection('servicio')" class="flex items-center justify-between w-full p-4">
+                        <div class="flex items-center">
+                            <div class="bg-green-100 text-green-600 p-2 rounded-full mr-4">
+                                <i class="fas fa-calendar-check fa-lg"></i>
+                            </div>
+                            <h2 class="text-lg font-semibold text-gray-800">Gestión de servicio social </h2>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" id="icon-servicio"
+                            class="h-5 w-5 text-gray-500 transition-transform duration-300" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                    <div id="section-servicio" class="overflow-hidden max-h-0 opacity-0 slide-down">
+                        <p class="text-sm text-gray-600 px-4">Gestione las visitas y acceda al historial de servicio social.</p>
+                        <div class="p-4">
+                            <button
+                            onclick="showBitacoraModal()"
+                                class="cursor-pointer bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-green-600">
+                                Acceder
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
                 <!-- Botón para cerrar sesión -->
                 <div class="mb-4 py-4 ">
                     <form method="POST" action="{{ route('logout') }}" class="">
@@ -290,7 +341,102 @@
             }
         });
     }
+    function showBitacoraModal() {
+        Swal.fire({
+            title: '¿Qué desea realizar?',
+            text: 'Seleccione una opción',
+            icon: 'question',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Registrar acceso',
+            denyButtonText: 'Horas realizadas ',
+            cancelButtonText: 'Cancelar',
+            reverseButtons: true,
+            customClass: {
+                confirmButton: 'bg-blue-500 text-white hover:bg-blue-600',
+                denyButton: 'bg-green-500 text-white hover:bg-green-600',
+                cancelButton: 'bg-gray-500 text-white hover:bg-gray-600'
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    'Registrar acceso',
+                    'Será redirigido a la sección de registro de acceso.',
+                    'success'
+                );
+                setTimeout(() => {
+                    window.location.href = '/registar-checada'; // Cambia esta URL según corresponda
+                }, 2000);
+            } else if (result.isDenied) {
+                // Opción de "Consultar proveedor"
+                Swal.fire(
+                    'Historial de horas realizadas',
+                    'Será redirigido a la sección de consulta.',
+                    'info'
+                );
+                setTimeout(() => {
+                    window.location.href = '/bitacora'; // Cambia esta URL según corresponda
+                }, 2000);
+                // Redirigir a la sección de consulta de proveedor
+            } else if (result.isDismissed) {
+                // Opción de "Cancelar"
+                Swal.fire(
+                    'Acción cancelada',
+                    'No se realizó ninguna acción.',
+                    'error'
+                );
+            }
+        });
+    }
 
+    // showEstudiantesModal
+    function showEstudiantesModal() {
+        Swal.fire({
+            title: '¿Qué desea realizar?',
+            text: 'Seleccione una opción',
+            icon: 'question',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Registrar estudiante ',
+            denyButtonText: 'Gestión de estudiantes ',
+            cancelButtonText: 'Cancelar',
+            reverseButtons: true,
+            customClass: {
+                confirmButton: 'bg-blue-500 text-white hover:bg-blue-600',
+                denyButton: 'bg-green-500 text-white hover:bg-green-600',
+                cancelButton: 'bg-gray-500 text-white hover:bg-gray-600'
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    'Registrar estudiante',
+                    'Será redirigido a la sección de registro de estudiante.',
+                    'success'
+                );
+                setTimeout(() => {
+                    window.location.href = '/registro-estudiante'; // Cambia esta URL según corresponda
+                }, 2000);
+            } else if (result.isDenied) {
+                // Opción de "Consultar proveedor"
+                Swal.fire(
+                    'Gestión de estudiantes',
+                    'Será redirigido a la sección de consulta.',
+                    'info'
+                );
+                setTimeout(() => {
+                    window.location.href = '/estudiantes'; // Cambia esta URL según corresponda
+                }, 2000);
+                // Redirigir a la sección de consulta de proveedor
+            } else if (result.isDismissed) {
+                // Opción de "Cancelar"
+                Swal.fire(
+                    'Acción cancelada',
+                    'No se realizó ninguna acción.',
+                    'error'
+                );
+            }
+        });
+    }
     </script>
 
 </body>

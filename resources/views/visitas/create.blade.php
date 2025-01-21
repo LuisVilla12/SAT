@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const fechaActual = `${año}-${mes}-${dia}`;
     fechaRegistroInput.value = fechaActual;  // Establecer la fecha en el input
-    console.log(fechaRegistroInput.value);
+    // console.log(fechaRegistroInput.value);
     
 });
 

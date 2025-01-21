@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BitacoraController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ServicioController;
 use App\Http\Controllers\VisitasController;
 use App\Models\User;
 use App\Models\Visitas;
@@ -35,6 +37,8 @@ Route::get('/consultar-proveedor', [ProveedorController::class,'index'])->name('
 Route::get('/editar-proveedor/{proveedor}/edit',[ ProveedorController::class,'edit'])->name('proveedor.edit')->middleware('auth');
 Route::post('/editar-proveedor/{proveedor}/edit',[ ProveedorController::class,'update']);
 
+
+
 //Visitas
 Route::get('/registro-visitas', [VisitasController::class,'create'])->name('visitas.create')->middleware('auth');
 Route::post('/registro-visitas', [VisitasController::class,'store']);
@@ -44,6 +48,20 @@ Route::post('/registar-salida/{visita}/edit',[ VisitasController::class,'update'
 Route::get('/mostrar-salida/{visita}',[ VisitasController::class,'show'])->name('visitas.show')->middleware('auth');
 //Pase
 use App\Http\Controllers\VisitaController;
+
+// Estudiantes
+Route::get('/registro-estudiante',[ ServicioController::class,'create'])->name('estudiante.create');
+Route::post('/registro-estudiante',[ ServicioController::class,'store']);
+Route::get('/estudiantes',[ ServicioController::class,'index'])->name('estudiante.index');
+Route::get('/estudiante/{estudiante}/edit',[ ServicioController::class,'edit'])->name('estudiante.edit');
+Route::post('/estudiante/{estudiante}/edit',[ ServicioController::class,'update']);
+
+
+// Bitacora
+Route::get('/registar-checada',[ BitacoraController::class,'create'])->name('bitacora.create');
+Route::post('/registar-checada',[ BitacoraController::class,'store']);
+Route::get('/bitacora',[ BitacoraController::class,'index'])->name('bitacora.index');
+
 
 Route::get('/visita/{id}/generar-pase', [VisitasController::class, 'generarPase'])->name('visitas.generarPase')->middleware('auth');
 
