@@ -42,6 +42,7 @@
                     <th class="py-3 px-4 uppercase text-center font-semibold text-sm">ID</th>
                     <th class="py-3 px-4 uppercase text-center font-semibold text-sm">Nombre completo</th>
                     <th class="py-3 px-4 uppercase text-center font-semibold text-sm">Instituto</th>
+                    <th class="py-3 px-4 uppercase text-center font-semibold text-sm">Matricula</th>
                     <th class="py-3 px-4 uppercase text-center font-semibold text-sm">Estado</th>
                     <th class="py-3 px-4 uppercase text-center font-semibold text-sm">Acciones</th>
                 </tr>
@@ -55,9 +56,10 @@
                     data-name="{{ strtolower($estudiante->name) }}" 
                     data-company="{{ strtolower($estudiante->company) }}"
                 >
-                    <td class="py-4 px-4">{{ $estudiante->id }}</td>
-                    <td class="py-4 px-4">{{ $estudiante->name . " " . $estudiante->lastname_p . " " . $estudiante->lastname_m }}</td>
-                    <td class="py-4 px-4">{{ $estudiante->company }}</td>
+                <td class="py-4 px-4">{{ $estudiante->id }}</td>
+                <td class="py-4 px-4">{{ $estudiante->name . " " . $estudiante->lastname_p . " " . $estudiante->lastname_m }}</td>
+                <td class="py-4 px-4">{{ $estudiante->company }}</td>
+                <td class="py-4 px-4">{{ $estudiante->matricula }}</td>
                     <td class="">
                         <span class="{{$estudiante->state == '1'? 'bg-green-600':'bg-gray-600' }} py-2 px-4 rounded-3xl text-white">{{ $estudiante->state == '1' ? 'Activo' : 'Inactivo' }}</span></td>
                     <td class="py-4 px-4 flex justify-center items-center">

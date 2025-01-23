@@ -44,13 +44,15 @@ class ServicioController extends Controller
             'lastname_p'=>' required','min:2','max:20',
             'lastname_m'=>' required','min:2','max:20',
             'company'=>' required','min:1','max:20',
+            'state'=>' required',
         ]);
         $estudiante->update([
             'matricula'=>$request->matricula,
             'name'=>$request->name,
             'lastname_p'=>$request->lastname_p,
             'lastname_m'=>$request->lastname_m,
-            'company'=>$request->company
+            'company'=>$request->company,
+            'state'=>$request->state
         ]);
         return redirect()->route('estudiante.index');
     }

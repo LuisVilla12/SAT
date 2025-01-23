@@ -60,7 +60,7 @@
             <select id="state" name="state" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 @error('type') border-solid border-2 border-red-500  @enderror">
                 <option value="" disabled selected>Seleccione un estado</option>
                 <option @php echo $estudiante->state =='1' ? 'selected':''; @endphp value="1">Activo</option>
-                <option @php echo $estudiante->state =='2' ? 'selected':''; @endphp value="2">Inactivo</option>
+                <option @php echo $estudiante->state =='0' ? 'selected':''; @endphp value="2">Inactivo</option>
             </select>
         </div>
         

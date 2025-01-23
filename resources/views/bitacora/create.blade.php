@@ -11,16 +11,14 @@
         
         <!-- Seleccionar matricula -->
         <div class="mb-5">
-        
             <label for="servicios_id" class="block text-gray-600 font-semibold mb-2">Estudiante:</label>
             <select id="servicios_id" name="servicios_id" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 @error('proveedors_id') border-solid border-2 border-red-500  @enderror">
-                <option value="" disabled selected>Seleccione un estudiante del servicio social</option>
+                
                 @foreach ($estudiantes as $estudiante)
-                    <option value="{{$estudiante->id}}">{{$estudiante->matricula . "--".$estudiante->name . " ". $estudiante->lastname_p. " ". $estudiante->lastname_m}}</option>
+                <option value="{{$estudiante->id}}">{{$estudiante->matricula . "--".$estudiante->name . " ". $estudiante->lastname_p. " ". $estudiante->lastname_m}}</option>
                 @endforeach
             </select>
             
-
                 <p class="text-gray-500 mt-1"> ¿No se encuentra registrado? 
                     <a href="{{ route('estudiante.create') }}" class="text-blue-600 font-semibold hover:underline">Registrarlo Ahora</a>
                 </p>
@@ -45,10 +43,6 @@
             </a>
             <input type="submit"  value="Registrar" class="enviar bg-blue-500 text-white font-bold py-3 hover:cursor-pointer px-10 rounded-lg hover:bg-blue-600 transition duration-300"/>
         </div>
-        {{-- <a href="{{ route('admin.index') }}" class="inline-block bg-red-500 text-white font-bold py-3 hover:cursor-pointer px-5 px-6  rounded-lg hover:bg-red-600 transition duration-300">
-                <img src="{{ asset('img/flecha.png') }}" class="w-6" alt="">
-            </a> --}}
-        
     </form>
 </div>
 @endsection

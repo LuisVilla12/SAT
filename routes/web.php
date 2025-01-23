@@ -46,8 +46,6 @@ Route::get('/visitas', [VisitasController::class,'index'])->name('visitas.index'
 Route::get('/registar-salida/{visita}/edit',[ VisitasController::class,'edit'])->name('visitas.edit')->middleware('auth');
 Route::post('/registar-salida/{visita}/edit',[ VisitasController::class,'update']);
 Route::get('/mostrar-salida/{visita}',[ VisitasController::class,'show'])->name('visitas.show')->middleware('auth');
-//Pase
-use App\Http\Controllers\VisitaController;
 
 // Estudiantes
 Route::get('/registro-estudiante',[ ServicioController::class,'create'])->name('estudiante.create');
@@ -58,11 +56,15 @@ Route::post('/estudiante/{estudiante}/edit',[ ServicioController::class,'update'
 
 
 // Bitacora
-Route::get('/registar-checada',[ BitacoraController::class,'create'])->name('bitacora.create');
-Route::post('/registar-checada',[ BitacoraController::class,'store']);
 Route::get('/bitacora',[ BitacoraController::class,'index'])->name('bitacora.index');
+Route::get('/registar-checada-entrada',[ BitacoraController::class,'create'])->name('bitacora.create');
+Route::post('/registar-checada-entrada',[ BitacoraController::class,'store']);
+Route::get('/registar-checada-salida/{registro}/edit',[ BitacoraController::class,'edit'])->name('bitacora.edit');
+Route::post('/registar-checada-salida/{registro}/edit',[ BitacoraController::class,'update']);
+Route::get('/mostrar-registro-checada/{registro}',[ BitacoraController::class,'show'])->name('bitacora.show')->middleware('auth');
 
 
+//Pase
 Route::get('/visita/{id}/generar-pase', [VisitasController::class, 'generarPase'])->name('visitas.generarPase')->middleware('auth');
 
 
