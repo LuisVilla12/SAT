@@ -21,7 +21,7 @@ return new class extends Migration
             $table->date('fecha_visita');
             $table->time('hora_entrada');
             $table->time('hora_salida');
-            $table->string('comentarios');
+            $table->string('comentarios')->nullable();
             $table->integer('state');
         });
     }

@@ -11,7 +11,12 @@
 @section('contenido')
     <div class="flex items-center justify-center min-h-screen bg-gray-100 p-6">
         <div class="w-full max-w-7xl bg-white p-14 shadow-lg rounded-lg overflow-hidden">
-            <h2 class="text-4xl font-bold text-left text-gray-700 mb-10"> Historial de checadas </h2>
+            <div class="flex justify-between mb-10">
+                <h2 class="text-4xl font-bold text-left text-gray-700"> Historial de checadas </h2>
+                <a href=""
+                    class="btnMostrar  bg-green-500 text-white font-bold py-3 hover:cursor-pointer px-5   rounded-lg hover:bg-green-600 transition duration-300">
+                    Consulta de horas totales</a>
+            </div>
             @if (count($registros) > 0)
                 <!-- Filtros y buscador -->
                 <div class="grid grid-cols-3 gap-3 mb-6">
@@ -75,14 +80,14 @@
                                     $diferencia = $salida->diff($entrada);
                                 @endphp
                                 <td class="py-4 px-4">
-                                    @if ($registro->hora_salida =='00:00:00')
+                                    @if ($registro->hora_salida == $registro->hora_entrada )
                                         Pendiente
                                     @else
                                         {{ $diferencia->h }} horas y {{ $diferencia->i }} minutos.
                                 </td>
                         @endif
                         <td class="py-4 px-4">
-                            @if ($registro->hora_salida == '00:00:00')
+                            @if ($registro->hora_salida == $registro->hora_entrada)
                                 <a href="{{ route('bitacora.edit', $registro) }}"
                                     class="flex place-items-center text-white font-bold py-3 px-5 rounded-full hover:transition duration-200">
                                     <img src="{{ asset('img/pendiente.png') }}" class="w-6 mx-auto" alt="">
@@ -115,6 +120,29 @@
                     Registrar checada
                 </a>
             </div>
+        </div>
+    </div>
+
+    <div id="myModal" class="hidden fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center">
+        <div class="bg-white rounded-lg shadow-lg p-6 w-1/2">
+            
+            <!-- Contenido del modal -->
+            <h2 class="text-xl font-semibold mb-4">Consulta de horas totales</h2>
+            <div class="mb-5">
+                <label for="servicios_id" class="block text-gray-600 font-semibold mb-2">Selecciona al estudiante:</label>
+                <select id="servicios_id" name="servicios_id" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 @error('proveedors_id') border-solid border-2 border-red-500  @enderror">
+                    
+                    @foreach ($estudiantes as $estudiante)
+                    <option value="{{$estudiante->id}}">{{"Matricula: ".$estudiante->matricula  . "--Nombre: ".$estudiante->name . " ". $estudiante->lastname_p. " ". $estudiante->lastname_m . "--Horas totales: ". $estudiante->tiempo_estadia}}</option>
+                    @endforeach
+                </select>
+
+                <div class="flex justify-center gap-5 mt-7">
+                    <a href="{{ route('bitacora.index') }}"
+                        class="closeModal bg-red-500 text-white font-bold py-3 hover:cursor-pointer px-5   rounded-lg hover:bg-red-600 transition duration-300">
+                        <img src="{{ asset('img/flecha.png') }}" class="w-6" alt="">
+                    </a>
+                </div>
         </div>
     </div>
 
@@ -156,6 +184,30 @@
             searchInput.addEventListener("input", filterTable);
             dateFilter.addEventListener("change", filterTable);
             exitHourFilter.addEventListener("change", filterTable);
+
+
+            // Selecciona el enlace y el modal
+            const btnMostrar = document.querySelector('.btnMostrar');
+            const modal = document.getElementById('myModal');
+            const btnCerrar = document.querySelector('.closeModal');
+
+            // Abrir el modal
+            btnMostrar.addEventListener('click', (e) => {
+                e.preventDefault(); // Evita el comportamiento por defecto del enlace
+                modal.classList.remove('hidden'); // Muestra el modal
+            });
+
+            // Cerrar el modal
+            btnCerrar.addEventListener('click', () => {
+                modal.classList.add('hidden'); // Oculta el modal
+            });
+
+            // Cerrar el modal haciendo clic fuera de él
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.add('hidden'); // Oculta el modal
+                }
+            });
         });
     </script>
 @endpush

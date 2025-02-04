@@ -56,6 +56,11 @@ class ServicioController extends Controller
         ]);
         return redirect()->route('estudiante.index');
     }
+    public function destroy($id){
+        $estudiante = Servicios::findOrFail($id);
+        $estudiante->delete();
+        return redirect()->route('estudiante.index');;
+    }
 }
 
 

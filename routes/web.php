@@ -36,6 +36,7 @@ Route::post('/registro-proveedor', [ProveedorController::class,'store']);
 Route::get('/consultar-proveedor', [ProveedorController::class,'index'])->name('proveedor.index')->middleware('auth');
 Route::get('/editar-proveedor/{proveedor}/edit',[ ProveedorController::class,'edit'])->name('proveedor.edit')->middleware('auth');
 Route::post('/editar-proveedor/{proveedor}/edit',[ ProveedorController::class,'update']);
+Route::delete('/proveedor/{id}', [ProveedorController::class, 'destroy'])->name('proveedor.destroy');
 
 
 
@@ -53,6 +54,9 @@ Route::post('/registro-estudiante',[ ServicioController::class,'store']);
 Route::get('/estudiantes',[ ServicioController::class,'index'])->name('estudiante.index');
 Route::get('/estudiante/{estudiante}/edit',[ ServicioController::class,'edit'])->name('estudiante.edit');
 Route::post('/estudiante/{estudiante}/edit',[ ServicioController::class,'update']);
+Route::delete('/estudiante/{id}', [ServicioController::class, 'destroy'])->name('estudiante.destroy');
+
+
 
 
 // Bitacora

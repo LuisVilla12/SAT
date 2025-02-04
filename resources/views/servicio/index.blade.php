@@ -66,9 +66,14 @@
                         <a href="{{ route('estudiante.edit', $estudiante) }}" class="flex place-items-center text-white font-bold py-3 px-5 rounded-full hover:transition duration-200">
                             <img src="{{ asset('img/editar.png') }}" class="w-7 mx-auto" alt="">
                         </a>
-                        <button class="flex place-items-center text-white font-bold py-3 px-4 rounded-full hover:transition duration-200">
+                        <form action="{{ route('estudiante.destroy', $estudiante->id) }}" method="POST" class="estudianteform">
+                            @csrf
+                            @method('DELETE')
+                        <button type="submit" class="btnEliminar flex place-items-center text-white font-bold py-3 px-4 rounded-full hover:transition duration-200">
                             <img src="{{ asset('img/delete.png') }}" class="w-7 mx-auto" alt="">
                         </button>
+                    </form>
+
                     </td>
                 </tr>
                 @endforeach
@@ -95,6 +100,30 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     document.addEventListener("DOMContentLoaded", () => {
+
+        const buttonDelete = document.querySelectorAll('.btnEliminar');
+
+// Itera sobre los botones y asigna el evento a cada uno
+buttonDelete.forEach((button) => {
+    button.addEventListener('click', (e) => {
+        e.preventDefault(); // Evita el envío inmediato del formulario
+
+        Swal.fire({
+            title: "¿Seguro que quieres eliminar este registro?",
+            showDenyButton: true,
+            confirmButtonText: "Eliminar",
+            denyButtonText: `Cancelar`,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Envía el formulario correspondiente al botón clicado
+                button.closest('form').submit();
+            } else if (result.isDenied) {
+                Swal.fire("No se llevo acabo la eliminación", "", "info");
+            }
+        });
+    });
+});
+
         const searchInput = document.getElementById("searchInput");
         const filterSelect = document.getElementById("filterSelect");
         const tableRows = document.querySelectorAll("#proveedoresTable tr");

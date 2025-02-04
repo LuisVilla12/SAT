@@ -85,7 +85,7 @@
             <input type="password" id="password" name="password" placeholder="Ingrese su contraseña" 
                 class="px-4 py-2 block w-full rounded-lg shadow-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 @error('password') border-red-500 @enderror">
             @error('password')
-                <p class="mx-1 mt-1 text-red-500">Debes ingresar una contraseña valida.</p>
+                <p class="mx-1 mt-1 text-red-500">Debes ingresar una contraseña valida minimo de 9 caracteres.</p>
             @enderror
         </div>
 

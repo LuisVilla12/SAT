@@ -49,4 +49,11 @@ class ProveedorController extends Controller
         ]);
         return redirect()->route('proveedor.index');
     }
+
+    public function destroy($id){
+    $proveedor = Proveedors::findOrFail($id);
+    $proveedor->delete();
+
+    return redirect()->route('proveedor.index')->with('success', 'Proveedor eliminado correctamente.');
+    }
 }

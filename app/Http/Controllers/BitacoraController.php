@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Bitacoras;
 use Illuminate\Http\Request;
 use App\Models\Servicios;
+use Illuminate\Support\Facades\DB;
+
 
 
 class BitacoraController extends Controller
@@ -12,7 +14,19 @@ class BitacoraController extends Controller
     //
     public function index(){
         $registros = Bitacoras::with('servicios')->orderBy('fecha_visita', 'desc')->paginate(10);
-        return view('bitacora.index',['registros'=>$registros]);
+        // $estudiantes =Servicios::all() ;
+        $estudiantes = Servicios::select(
+            'servicios.matricula',
+            'servicios.name',
+            'servicios.lastname_p',
+            'servicios.lastname_m',
+            'servicios.company',
+            DB::raw('SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(bitacoras.hora_salida, bitacoras.hora_entrada)))) AS tiempo_estadia')
+        )
+        ->join('bitacoras', 'bitacoras.servicios_id', '=', 'servicios.id')
+        ->groupBy('servicios.id', 'servicios.matricula', 'servicios.name', 'servicios.lastname_p', 'servicios.lastname_m', 'servicios.company')
+        ->get() ;
+        return view('bitacora.index',['registros'=>$registros, 'estudiantes'=>$estudiantes]);
     }
     public function create(){
         $estudiantes=Servicios::all();
@@ -28,7 +42,7 @@ class BitacoraController extends Controller
             'servicios_id'=>$request->servicios_id,
             'fecha_visita'=>$request->fecha_visita,
             'hora_entrada'=>$request->hora_entrada,
-            'hora_salida'=>'00:00',
+            'hora_salida'=>$request->hora_entrada,
             'state'=>1
         ]);
         // return response()->json(['success' => true, 'message' => 'Proveedor registrado exitosamente.']);
