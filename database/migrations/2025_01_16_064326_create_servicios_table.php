@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('lastname_p');
             $table->string('lastname_m');
             $table->string('company');
+            $table->string('mesInicio');
             $table->string('state');
         });
     }

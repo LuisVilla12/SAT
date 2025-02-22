@@ -20,7 +20,7 @@
                 <span class="absolute pl-3 text-gray-400">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </span>
-                <input  type="text" id="searchInput" placeholder="Buscar por nombre o instituto..." 
+                <input  type="text" id="searchInput" placeholder="Buscar por nombre o instituto o periodo..." 
                 class="px-4  pl-10 py-2 border border-gray-300 rounded-lg w-96 focus:outline-none focus:ring-2 focus:ring-blue-400"/>
             </div>
             <!-- Filtro por estado -->
@@ -55,6 +55,8 @@
                     data-state="{{ $estudiante->state }}" 
                     data-name="{{ strtolower($estudiante->name) }}" 
                     data-company="{{ strtolower($estudiante->company) }}"
+                    data-mes="{{ strtolower($estudiante->mesInicio) }}"
+
                 >
                 <td class="py-4 px-4">{{ $estudiante->id }}</td>
                 <td class="py-4 px-4">{{ $estudiante->name . " " . $estudiante->lastname_p . " " . $estudiante->lastname_m }}</td>
@@ -136,8 +138,10 @@ buttonDelete.forEach((button) => {
                 const state = row.getAttribute("data-state");
                 const name = row.getAttribute("data-name");
                 const company = row.getAttribute("data-company");
+                const mesInicio = row.getAttribute("data-mes");
 
-                const matchesSearch = name.includes(searchValue) || company.includes(searchValue);
+
+                const matchesSearch = name.includes(searchValue) ||mesInicio.includes(searchValue) || company.includes(searchValue);
                 const matchesFilter = filterValue === "all" || state === filterValue;
 
                 if (matchesSearch && matchesFilter) {

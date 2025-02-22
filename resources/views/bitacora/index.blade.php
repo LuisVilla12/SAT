@@ -13,8 +13,8 @@
         <div class="w-full max-w-7xl bg-white p-14 shadow-lg rounded-lg overflow-hidden">
             <div class="flex justify-between mb-10">
                 <h2 class="text-4xl font-bold text-left text-gray-700"> Historial de checadas </h2>
-                <a href=""
-                    class="btnMostrar  bg-green-500 text-white font-bold py-3 hover:cursor-pointer px-5   rounded-lg hover:bg-green-600 transition duration-300">
+                <a href="{{ route('bitacora.horasTotales') }}"
+                    class=" bg-green-500 text-white font-bold py-3 hover:cursor-pointer px-5   rounded-lg hover:bg-green-600 transition duration-300">
                     Consulta de horas totales</a>
             </div>
             @if (count($registros) > 0)
@@ -70,7 +70,7 @@
                                 <td class="py-4 px-4">{{ $registro->fecha_visita }}</td>
                                 <td class="py-4 px-4">{{ $registro->hora_entrada }}</td>
                                 <td class="py-4 px-4">
-                                    {{ $registro->hora_salida == '00:00:00' ? 'Sin registro' : $registro->hora_salida }}
+                                    {{ $registro->hora_salida ==$registro->hora_entrada  ? 'Sin registro' : $registro->hora_salida }}
                                 </td>
                                 @php
                                     // Convertir las horas a objetos DateTime

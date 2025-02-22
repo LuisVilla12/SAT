@@ -98,4 +98,9 @@ class RegisterController extends Controller
         ]);
         return redirect()->route('auth.index');
     }
+    public function destroy($id){
+        $usuario = User::findOrFail($id);
+        $usuario->delete();
+        return redirect()->route('auth.index');;
+    }
 }

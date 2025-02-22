@@ -7,7 +7,7 @@
 <div class="flex items-center justify-center min-h-screen bg-gray-100">
     <form action="{{ route('estudiante.edit',$estudiante) }}" method="POST" class="estudiante w-full max-w-lg bg-white p-8 shadow-md rounded-lg">
         @csrf
-        <h2 class="text-4xl font-bold text-center text-gray-700 mb-10">Editar estudiante</h2>
+        <h2 class="text-4xl font-bold text-center text-gray-700 mb-10">Editar estudiante del servicio social</h2>
         <div class="mb-5">
             <label for="matricula" class="block text-gray-600 font-semibold mb-2">Matricula:</label>
             <input type="text" id="matricula" name="matricula" required placeholder="Ingrese la matricula" 
@@ -42,8 +42,6 @@
                     <p class="mx-1 mt-1 text-red-500">Debes ingresar un apellido materno valido.</p>
                 @enderror
         </div>
-        
-
         <!-- Nombre de la empresa -->
         <div class="mb-5">
             <label for="company" class="block text-gray-600 font-semibold mb-2">Nombre de la institución:</label>
@@ -53,7 +51,27 @@
                     <p class="mx-1 mt-1 text-red-500">Debes ingresar un nombre de un instituto valido.</p>
                 @enderror
         </div>
-   
+        <div class="mb-5">
+            <label for="mesInicio" class="block text-gray-600 font-semibold mb-2">Inicio del periodo:</label>
+            <select id="mesInicio" name="mesInicio" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 @error('type') border-solid border-2 border-red-500  @enderror">
+                <option value="" disabled selected>Seleccione el inicio del periodo</option>
+                <option @php echo $estudiante->mesInicio =='enero' ? 'selected':''; @endphp value="1">Enero</option>
+                <option @php echo $estudiante->mesInicio =='febrero' ? 'selected':''; @endphp value="2">Febrero</option>
+                <option @php echo $estudiante->mesInicio =='marzo' ? 'selected':''; @endphp value="3">Marzo</option>
+                <option @php echo $estudiante->mesInicio =='abril' ? 'selected':''; @endphp value="4">Abril</option>
+                <option @php echo $estudiante->mesInicio =='mayo' ? 'selected':''; @endphp value="5">Mayo</option>
+                <option @php echo $estudiante->mesInicio =='junio' ? 'selected':''; @endphp value="6">Junio</option>
+                <option @php echo $estudiante->mesInicio =='julio' ? 'selected':''; @endphp value="7">Julio</option>
+                <option @php echo $estudiante->mesInicio =='agosto' ? 'selected':''; @endphp value="8">Agosto</option>
+                <option @php echo $estudiante->mesInicio =='septiembre' ? 'selected':''; @endphp value="9">Septiembre</option>
+                <option @php echo $estudiante->mesInicio =='octubre' ? 'selected':''; @endphp value="10">Octubre</option>
+                <option @php echo $estudiante->mesInicio =='noviembre' ? 'selected':''; @endphp value="11">Noviembre</option>
+                <option @php echo $estudiante->mesInicio =='diciembre' ? 'selected':''; @endphp value="12">Diciembre</option>
+            </select>
+            @error('mesInicio')
+            <p class="mx-1 mt-1 text-red-500">Debes seleccionar un mes de inicio de periodo.</p>
+        @enderror
+        </div>
         <!-- Estado -->
         <div class="mb-5">
             <label for="state" class="block text-gray-600 font-semibold mb-2">Estado del estudiante:</label>

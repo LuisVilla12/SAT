@@ -43,9 +43,7 @@
                     <p class="mx-1 mt-1 text-red-500">Debes ingresar un apellido materno valido.</p>
                 @enderror
         </div>
-        
-
-        <!-- Nombre de la empresa -->
+        <!-- Nombre del instituto -->
         <div class="mb-5">
             <label for="company" class="block text-gray-600 font-semibold mb-2">Nombre de la institución:</label>
             <input type="text" id="company" name="company" required placeholder="Ingrese el nombre de la institución" 
@@ -54,7 +52,28 @@
                     <p class="mx-1 mt-1 text-red-500">Debes ingresar un nombre de un instituto valido.</p>
                 @enderror
         </div>
-                
+        {{-- Inicio del periodo --}}
+        <div class="mb-5">
+            <label for="mesInicio" class="block text-gray-600 font-semibold mb-2">Inicio del periodo:</label>
+            <select id="mesInicio" name="mesInicio" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 @error('type') border-solid border-2 border-red-500  @enderror">
+                <option value="" disabled selected>Seleccione el inicio del periodo</option>
+                <option value="enero">Enero</option>
+                <option value="febrero">Febrero</option>
+                <option value="marzo">Marzo</option>
+                <option value="abri">Abril</option>
+                <option value="mayo">Mayo</option>
+                <option value="junio">Junio</option>
+                <option value="julio">Julio</option>
+                <option value="agosto">Agosto</option>
+                <option value="septiembre">Septiembre</option>
+                <option value="octubre">Octubre</option>
+                <option value="noviembre">Noviembre</option>
+                <option value="diciembre">Diciembre</option>
+            </select>
+            @error('mesInicio')
+            <p class="mx-1 mt-1 text-red-500">Debes seleccionar un mes de inicio de periodo.</p>
+        @enderror
+        </div>
         <!-- Botón de Enviar -->
         <div class="flex justify-evenly gap-5 mt-10">
             <a href="{{ route('admin.index') }}" class="bg-red-500 text-white font-bold py-3 hover:cursor-pointer px-5   rounded-lg hover:bg-red-600 transition duration-300">

@@ -13,6 +13,7 @@ class Servicios extends Model
         'lastname_p',
         'lastname_m',
         'company',
+        'mesInicio',
         'state',
     ];
 

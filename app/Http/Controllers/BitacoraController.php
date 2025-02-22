@@ -16,6 +16,7 @@ class BitacoraController extends Controller
         $registros = Bitacoras::with('servicios')->orderBy('fecha_visita', 'desc')->paginate(10);
         // $estudiantes =Servicios::all() ;
         $estudiantes = Servicios::select(
+            'servicios.id',
             'servicios.matricula',
             'servicios.name',
             'servicios.lastname_p',
@@ -72,5 +73,21 @@ class BitacoraController extends Controller
     public function show(Bitacoras $registro){
         $estudiante = Servicios::where('id', $registro->servicios_id)->get();
         return view('bitacora.show',['registro'=>$registro,'estudiantes'=>$estudiante]);
+    }
+    public function horasTotales(){
+        $registros = Bitacoras::with('servicios')->orderBy('fecha_visita', 'desc')->paginate(10);
+        // $estudiantes =Servicios::all() ;
+        $estudiantes = Servicios::select(
+            'servicios.matricula',
+            'servicios.name',
+            'servicios.lastname_p',
+            'servicios.lastname_m',
+            'servicios.company',
+            DB::raw('SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(bitacoras.hora_salida, bitacoras.hora_entrada)))) AS tiempo_estadia')
+        )
+        ->join('bitacoras', 'bitacoras.servicios_id', '=', 'servicios.id')
+        ->groupBy('servicios.id', 'servicios.matricula', 'servicios.name', 'servicios.lastname_p', 'servicios.lastname_m', 'servicios.company')
+        ->get() ;
+        return view('bitacora.horasTotales',['registros'=>$registros, 'estudiantes'=>$estudiantes]);
     }
 }

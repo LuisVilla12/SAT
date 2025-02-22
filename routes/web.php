@@ -28,6 +28,7 @@ Route::post('/editar-usuario/{user}/edit',[ RegisterController::class,'update'])
 Route::get('/mostrar-usuario/{user}',[ RegisterController::class,'show'])->name('auth.show')->middleware('auth','check.usertype');
 Route::get('/cambiar-password/{user}',[ RegisterController::class,'gedit_password'])->name('auth.edit_password')->middleware('auth','check.usertype');
 Route::post('/cambiar-password/{user}',[ RegisterController::class,'pedit_password']);
+Route::delete('/usuarios/{id}', [RegisterController::class, 'destroy'])->name('auth.destroy');
 
 
 // Proveedores
@@ -66,6 +67,7 @@ Route::post('/registar-checada-entrada',[ BitacoraController::class,'store']);
 Route::get('/registar-checada-salida/{registro}/edit',[ BitacoraController::class,'edit'])->name('bitacora.edit');
 Route::post('/registar-checada-salida/{registro}/edit',[ BitacoraController::class,'update']);
 Route::get('/mostrar-registro-checada/{registro}',[ BitacoraController::class,'show'])->name('bitacora.show')->middleware('auth');
+Route::get('/mostrar-horas-totales',[ BitacoraController::class,'horasTotales'])->name('bitacora.horasTotales');
 
 
 //Pase

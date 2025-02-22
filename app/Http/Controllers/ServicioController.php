@@ -22,6 +22,7 @@ class ServicioController extends Controller
             'lastname_p'=>' required','min:2','max:20',
             'lastname_m'=>' required','min:2','max:20',
             'company'=>' required','min:1','max:20',
+            'mesInicio'=>' required',
         ]);
         Servicios::create([
             'matricula'=>$request->matricula,
@@ -29,8 +30,10 @@ class ServicioController extends Controller
             'lastname_p'=>$request->lastname_p,
             'lastname_m'=>$request->lastname_m,
             'company'=>$request->company,
+            'mesInicio'=>$request->mesInicio,
             'state'=>1
         ]);
+        // dd($request);
         // return response()->json(['success' => true, 'message' => 'Proveedor registrado exitosamente.']);
         return redirect()->route('estudiante.index');
     }
@@ -44,6 +47,7 @@ class ServicioController extends Controller
             'lastname_p'=>' required','min:2','max:20',
             'lastname_m'=>' required','min:2','max:20',
             'company'=>' required','min:1','max:20',
+            'mesInicio'=>'required',
             'state'=>' required',
         ]);
         $estudiante->update([
@@ -52,7 +56,8 @@ class ServicioController extends Controller
             'lastname_p'=>$request->lastname_p,
             'lastname_m'=>$request->lastname_m,
             'company'=>$request->company,
-            'state'=>$request->state
+            'state'=>$request->state,
+            'mesInicio'=>$request->mesInicio,
         ]);
         return redirect()->route('estudiante.index');
     }

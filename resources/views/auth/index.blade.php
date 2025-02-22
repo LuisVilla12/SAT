@@ -63,9 +63,13 @@
                         <a href="{{ route('auth.edit_password',$usuario->id) }}" class="flex place-items-center text-white font-bold py-3 px-5 rounded-full hover:transition duration-200">
                             <img src="{{ asset('img/lock.png') }}" class="w-7 mx-auto" alt="">
                         </a>
-                        {{-- <button class="flex place-items-center text-white font-bold py-3 px-4 rounded-full hover:transition duration-200">
-                            <img src="{{ asset('img/delete.png') }}" class="w-7 mx-auto" alt="">
-                        </button> --}}
+                        <form action="{{ route('auth.destroy', $usuario->id) }}" method="POST" class="proveedorform">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit"  class="btnEliminar flex place-items-center text-white font-bold py-3 px-4 rounded-full hover:transition duration-200">
+                                <img src="{{ asset('img/delete.png') }}" class="w-7 mx-auto" alt="">
+                            </button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach
@@ -97,6 +101,26 @@
     document.addEventListener("DOMContentLoaded", () => {
         const searchInput = document.getElementById("searchInput");
         const tableRows = document.querySelectorAll("#usersTable tr");
+        const buttonDelete = document.querySelectorAll('.btnEliminar');
+        buttonDelete.forEach((button) => {
+    button.addEventListener('click', (e) => {
+        e.preventDefault(); // Evita el envío inmediato del formulario
+
+        Swal.fire({
+            title: "¿Seguro que quieres eliminar este registro?",
+            showDenyButton: true,
+            confirmButtonText: "Eliminar",
+            denyButtonText: `Cancelar`,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Envía el formulario correspondiente al botón clicado
+                button.closest('form').submit();
+            } else if (result.isDenied) {
+                Swal.fire("No se llevo acabo la eliminación", "", "info");
+            }
+        });
+    });
+});
 
         function filterTable() {
             const searchValue = searchInput.value.toLowerCase();
